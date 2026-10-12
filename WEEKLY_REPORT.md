@@ -1,31 +1,28 @@
-# Weekly report
+# Weekly Capstone Progress Report
+**Project:** JetBlue Operational Performance & Strategic Risk Analytics
 
-**Week ending:** 12 October 2026  
-**Student:** Trey Parkes  
-**Repository:** [Film-Performance-Analytics](https://github.com/treyparkes0/Film-Performance-Analytics)
+## Work Completed This Week
 
-This note is what happened. It is not the research plan.
+This week, I refined my capstone project from the original Disney film performance analysis to a JetBlue-focused operational analytics project. The objective is to investigate where operational risks are concentrated, identify factors associated with flight disruptions, and determine where management could prioritize resources to improve operational reliability.
 
-## Capstone change
+I established the project's primary business questions, focusing on JetBlue's operational performance over time, differences in delays and cancellations across airports and routes, factors associated with flight disruptions, and the potential use of predictive analytics to identify higher-risk flights and operational areas.
 
-The capstone moved from a film-performance idea to JetBlue domestic operations. Disney documents were removed from main. The GitHub repository had been named Film-Performance-Analytics. It now resolves as JetBlue-Operational-Performance-and-Strategic-Risk-Analytics. The old name still redirects.
+I reviewed the Bureau of Transportation Statistics (BTS) aviation databases and identified relevant data fields for the project. The primary dataset will be the Reporting Carrier On-Time Performance dataset, which includes flight-level information such as scheduled and actual departure and arrival times, delays, cancellations, routes, and flight distance. I also reviewed the T-100 Domestic Segment dataset as a potential supplemental source for flight volume, passenger, and capacity information.
 
-## Phase 1
+## Technology Stack and Analytical Approach
 
-The Phase 1 audit was completed and placed on main as `DATA_AUDIT.md`. Trey accepted it on 12 October 2026. The call was GO. The raw monthly zip files were not kept in git.
+I developed a proposed technology stack to support the project from data preparation through business recommendations. Python will be used for data ingestion, cleaning, exploratory data analysis, feature engineering, and machine learning. Snowflake will serve as the cloud data platform, while dbt will manage SQL transformations, data modeling, testing, and documentation. GitHub will support version control and project documentation.
 
-## Architecture
+The planned machine-learning component will estimate the likelihood of significant flight disruption using information available before a flight operates. These predictions will be combined with historical operational performance and flight volume to help prioritize airports and routes for further investigation.
 
-An architecture review recommended leaving Monte Carlo out. Snowflake was discussed as a possible warehouse. It was not chosen. Nothing was built: no download pipeline, no database, no model, no Excel workbook, and no Power BI report.
+Excel will be used for scenario analysis to evaluate potential operational improvements under different assumptions, while Power BI will serve as the final presentation layer for communicating performance trends, risk concentrations, model findings, and strategic recommendations.
 
-## Phase 2
+I also evaluated the potential use of Monte Carlo simulation. The current priority is to complete the core data pipeline, exploratory analysis, predictive modeling, and operational risk prioritization before deciding whether simulation would add meaningful value.
 
-Phase 2 was requested on 12 October 2026: a business problem, a data dictionary, and a methodology. Those three files are on main: `BUSINESS_PROBLEM.md`, `DATA_DICTIONARY.md`, and `METHODOLOGY.md`.
+## Next Steps
 
-## What did not happen
+The next step is to begin Python-based exploratory data analysis using the reviewed BTS data. This will involve inspecting the dataset's structure, assessing data quality and completeness, examining delay and cancellation patterns, and identifying trends across airports, routes, and time periods.
 
-A desktop `git pull` was unreliable until the clone folder is the GitHub repository. No model was fit. Sample metric printouts shown in chat were invented illustrations, not results.
+The findings will help refine the project's business questions, establish a defensible operational risk methodology, and determine which variables are suitable for predictive modeling. After the initial analysis, I will continue developing the Snowflake and dbt architecture and document the data sources, assumptions, and analytical methods used throughout the project.
 
-## Next
-
-Phase 2 is on main. Stop there. Do not start the download or the model.
+The immediate objective is to establish a reliable understanding of the data before proceeding to machine learning, scenario analysis, and the final Power BI dashboard.
