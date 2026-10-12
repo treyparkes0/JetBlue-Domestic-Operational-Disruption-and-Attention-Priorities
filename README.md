@@ -8,4 +8,4 @@ Scope is domestic flying in the Bureau of Transportation Statistics on-time file
 
 The public source is the BTS Reporting Carrier On-Time Performance table, carrier `B6`. No proprietary JetBlue data.
 
-The data audit, pipeline, models, Excel scenarios, and dashboard are not built yet.
+The audit is in DATA_AUDIT.md, and the Phase 2 documents are BUSINESS_PROBLEM.md, DATA_DICTIONARY.md, and METHODOLOGY.md; the pipeline, models, Excel scenarios, and dashboard are not built.
