@@ -1,0 +1,25 @@
+# Secrets
+.env
+.env.*
+
+# Local Word reports. Markdown in Documentation/ stays tracked.
+Reports/
+Documentation/
+
+# Word lock files
+~$*
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Official BTS downloads stay on this machine.
+# data/jetblue_bts_coverage.csv stays tracked.
+data/raw/
+*.zip
+
+# OS
+.DS_Store
+Thumbs.db
