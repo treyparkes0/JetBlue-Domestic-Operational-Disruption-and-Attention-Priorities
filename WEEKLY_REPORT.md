@@ -8,7 +8,7 @@ This note is what happened. It is not the research plan.
 
 ## Capstone change
 
-The capstone moved from a film-performance idea to JetBlue domestic operations. Disney documents were removed from main. The GitHub repository name is still Film-Performance-Analytics.
+The capstone moved from a film-performance idea to JetBlue domestic operations. Disney documents were removed from main. The GitHub repository had been named Film-Performance-Analytics. It now resolves as JetBlue-Operational-Performance-and-Strategic-Risk-Analytics. The old name still redirects.
 
 ## Phase 1
 
