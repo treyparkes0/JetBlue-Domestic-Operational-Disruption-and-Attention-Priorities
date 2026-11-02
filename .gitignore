@@ -4,7 +4,6 @@
 
 # Local Word reports. Markdown in Documentation/ stays tracked.
 Reports/
-Documentation/
 
 # Word lock files
 ~$*
@@ -14,6 +13,12 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+
+# dbt build output
+target/
+dbt_packages/
+logs/
+.user.yml
 
 # Official BTS downloads stay on this machine.
 # data/jetblue_bts_coverage.csv stays tracked.

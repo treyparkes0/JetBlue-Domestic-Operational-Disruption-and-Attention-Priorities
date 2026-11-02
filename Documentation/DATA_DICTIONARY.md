@@ -125,7 +125,7 @@ A blank cause minute is not a measured zero, and it is not evidence that the col
 | C | National Air System | National Aviation System | 11,154 |
 | D | Security | Security | 6,756 |
 
-There is no fifth cancellation code in this extract.
+There is no fifth cancellation code in this extract. The year-and-month distribution of these codes is in `dbt_dev.cancellation_reason` and in `FINDINGS.md`. Security-coded cancellations are concentrated in March and April 2020.
 
 ## Fields that are not substitutes
 

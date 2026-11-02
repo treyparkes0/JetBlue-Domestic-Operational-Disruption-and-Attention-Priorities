@@ -6,7 +6,7 @@
 
 **Call: GO.** Every field the project needs is in the flight-level file. The measured JetBlue extract covers 1 January 2018 through 31 July 2026, which is the latest month posted. No required field is absent. The extract is domestic only. Do not read it as international coverage.
 
-Phase 2 is not started.
+This file review was completed on 8 October 2026. Current status of the views, the forecast, and the priority framework is in `METHODOLOGY.md`.
 
 ## Dataset
 

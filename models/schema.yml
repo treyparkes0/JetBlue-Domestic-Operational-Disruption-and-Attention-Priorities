@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: monthly_performance
+    description: One row per year and month. Late-arrival rate uses operated flights. Cancellation rate uses every flight. Do not average the stored rate columns.
+  - name: airport_month
+    description: One row per airport, year, month, and role. Origin and destination stay separate. Do not average the stored rate columns.
+  - name: route_month
+    description: One row per directed origin-destination pair, year, and month. Do not average the stored rate columns.
+  - name: delay_causes
+    description: Late arrivals only. Blank cause minutes stay blank. The dashboard does not need this view. Cause minutes are already summed on monthly_performance and airport_month.
+  - name: weekday_performance
+    description: One row per day of week for the full window, Monday = 1 through Sunday = 7. Pools 2020. Late-arrival rate uses operated flights. Cancellation rate uses every flight. Do not average the stored rate columns.
+  - name: cancellation_reason
+    description: Cancelled flights only, one row per year, month, and cancellation code. A carrier, B weather, C national air system, D security. A blank code would be labeled Unknown. This is not a delay-minute split.
+  - name: origin_priority
+    description: One row per origin for the full window. High accumulated impact is the 10 origins with the most arrival-delay minutes among origins with at least 1,000 flights. Elevated flags are the top quartile of late-arrival rate or cancellation rate inside that same volume floor. Monitoring is 250 to 999 flights with a late-arrival rate at or above that quartile. Flags can overlap. There is no weighted score.
+  - name: route_priority
+    description: One row per directed route for the full window. High accumulated impact is the 10 routes with the most arrival-delay minutes among routes with at least 500 flights. Elevated flags use the top quartile inside that floor. Monitoring is 250 to 499 flights with a late-arrival rate at or above that quartile. The reverse direction is a different route. There is no weighted score.
