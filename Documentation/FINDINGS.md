@@ -1,6 +1,7 @@
 # Findings: JetBlue domestic operational risk
 
 **Reconciled:** 2 November 2026  
+**Workbook and dashboard:** 8 November 2026  
 **Warehouse:** `jetblue_capstone.dbt_dev`  
 **Python check:** `src/jetblue_eda.py`, same date, against `data/raw/jetblue_b6.csv`  
 **Question:** where JetBlue’s domestic operational risk is concentrated, what is associated with it, and where limited attention should go first.
@@ -15,9 +16,9 @@ Arrival-delay minutes are concentrated. Five origins — JFK, Boston, Fort Laude
 
 The rate does not follow the same order. Boston has more departures than JFK and a lower late-arrival rate (25.4% versus 27.8%). JFK still has more minutes. Fort Lauderdale and Orlando combine a rate near 30% with a large base, so they sit in both the minute ranking and the top quartile of late-arrival rate. Miami is the clearest reliability watch item with a real base: 13,280 flights and a 34.3% late-arrival rate, outside the top 10 by minutes.
 
-Sunday has the highest late-arrival rate (29.5%), the highest cancellation rate (2.88%), and the most minutes. Friday is the busiest day and is not the least reliable. Wednesday is the most reliable day. July is the heaviest calendar month. About 76.4% of recorded late-arrival cause minutes are carrier plus late aircraft.
+Sunday has the highest late-arrival rate (29.5%), the highest cancellation rate (2.88%), and the most minutes. Friday is the busiest day and is not the least reliable. Wednesday is the most reliable day. July is the heaviest calendar month. Both leads hold with 2020 removed: Sunday is 30.8% late and 7,175,925 minutes, and July is 34.9% late and 5,671,988 minutes. About 76.4% of recorded late-arrival cause minutes are carrier plus late aircraft.
 
-The cancellation forecast for August 2026–July 2027 is 280,987 flights and 10,716 baseline cancellations. Cutting cancellations 5%, 10%, and 15% while holding flights fixed avoids 536, 1,072, and 1,607 cancellations. Those are scenario counts. The holdout missed by 2.31 percentage points on average.
+The workbook compares attention lists. The first five origins by minutes cover 49.9% of arrival-delay minutes. The five highest late-arrival rates cover 0.17%. That comparison is in the workbook section below.
 
 ## Overall operational performance
 
@@ -95,6 +96,17 @@ Friday has the most flights. Sunday has the highest late-arrival rate, the highe
 
 Calendar month, all years pooled, is unchanged from the 25 October run. July is the heaviest month on both late-arrival rate (33.6%) and minutes (5,754,997). October is the lightest late-arrival month (21.1%). March’s cancellation rate (4.2%) is pulled up by 2020. August–December in that pooled table do not include 2026.
 
+The same measures were rerun on 8 November 2026 with 2020 left out. The full-window query reproduced the locked Sunday counts (312,745 flights, 89,337 late arrivals, 7,370,693 minutes) and the locked July totals (33.6% late, 5,754,997 minutes). Rates are summed late arrivals divided by summed operated flights.
+
+| Measure | All years, including 2020 | 2020 removed |
+| --- | ---: | ---: |
+| Sunday late-arrival rate | 29.5% | 30.8% |
+| Sunday arrival-delay minutes | 7,370,693 | 7,175,925 |
+| July late-arrival rate | 33.6% | 34.9% |
+| July arrival-delay minutes | 5,754,997 | 5,671,988 |
+
+Sunday still has the highest late-arrival rate, the highest cancellation rate (2.79%), and the most minutes. Friday is next on the late-arrival rate, at 29.6%. July still has the highest late-arrival rate and the most minutes. August is next on the rate, at 32.0%. With 2020 removed, January has the highest calendar-month cancellation rate, at 4.22%. August–December in that cut still do not include 2026.
+
 ## Cancellation codes
 
 `cancellation_reason` covers cancelled flights only. All 50,674 have a code. The test matched A 14,477, B 18,287, C 11,154, and D 6,756. There is no Unknown row. This split is not the delay-minute split.
@@ -127,29 +139,22 @@ Cause minutes are on the 551,753 late arrivals only. `delay_causes` has that row
 
 Arrival-delay minutes (44,184,241) are larger than cause minutes because operated flights with a delay under 15 minutes still contribute floored `ArrDelayMinutes`, and those flights have blank cause fields.
 
-## Forecast
+## Attention lists
 
-`Jetblue_Analysis.xlsx`, sheet `Forecast`. The method was not changed on 2 November 2026.
+`Jetblue_sensitivity_analysis.xlsx`. `Raw Data` is the origin extract. `Airports` ranks each origin by arrival-delay minutes and by late-arrival rate. `Scenario` and `Scorecard` compare lists. They do not forecast, and they do not assign a new rank.
 
-Flights and the cancellation rate are forecast separately with `FORECAST.ETS`, seasonality 12. Baseline cancellations are forecast flights times the forecast rate. The fit is January 2021–July 2026, so 2020 is excluded. The horizon is August 2026–July 2027. January–July 2026 stays labeled as a partial year.
+The plan is the first five origins by minutes: JFK, Boston, Fort Lauderdale, Orlando, and San Juan.
 
-The holdout fits January 2021–July 2025 and scores August 2025–July 2026. Average absolute error is 2.31 percentage points (`Forecast!L25` = 0.02306). April 2026 and July 2026 are the large misses. A percentage error on a near-zero cancellation month is not the headline.
+| List of five | Minutes | Share of minutes | Flights | Share of flights | Cancellations | Late-arrival rate |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| First five by minutes | 22,045,754 | 49.9% | 1,065,139 | 50.5% | 24,551 | 27.7% |
+| Five highest late-arrival rates | 75,342 | 0.17% | 2,340 | 0.11% | 70 | 35.8% |
 
-## Scenario analysis
+The rate list is Traverse City, Boise, Asheville, Wilmington (NC), and Newburgh. That list has no volume floor. Traverse City and Boise are under 250 flights, so `origin_priority` leaves them off the monitoring list. The rate is higher and the base is small. Newark is the largest minute airport left off the first five. LaGuardia is the cancellation airport left off the first five. Extending the minutes list to ten origins brings the share to 65.4%.
 
-Sheets `Scenario` and `Scenario_Summary`. Flights stay at the forecast. The 5%, 10%, and 15% cuts apply to baseline cancellations. Cancellations avoided are baseline minus the scenario count.
+The workbook also offers the first ten by minutes, the five origins with the most cancellations, and the first five by minutes plus the largest cancellation airport left off. Each option reports the share of minutes, flights, and cancellations that list covers. These are coverage counts. They are not a measured saving, and they do not say a management action will produce a cut.
 
-| | August 2026–July 2027 |
-| --- | ---: |
-| Forecast flights | 280,987 |
-| Baseline cancellations | 10,716 |
-| Avoided at 5% | 536 |
-| Avoided at 10% | 1,072 |
-| Avoided at 15% | 1,607 |
-
-August 2026 alone is 23,232 flights, 844 baseline cancellations, and 42 cancellations avoided at 5%. These counts are a sensitivity. They are not a measured saving and they do not say a management action will produce the cut.
-
-The old `Sheet3` pivot summed 2018 late-arrival rates to 3.27. That sheet was removed. It is not a finding.
+These totals include 2020. 2026 is January–July only. Shares are summed counts divided by the network total. The late-arrival rate on a list is late flights divided by flights that operated.
 
 ## Operational prioritization
 
@@ -181,12 +186,12 @@ These are places to look. They are not a claim that a particular change will cut
 ## Limitations
 
 - Public BTS reports, not JetBlue’s internal operation. No passengers, fares, crew, maintenance, or independent weather.
-- No causal estimate and no dollar figure. The scenario holds flights fixed and applies an assumed cut.
+- No causal estimate and no dollar figure. The workbook reports the share of the network each attention list covers.
 - 2020 is not exchangeable with other years. Weekday, calendar-month, and whole-window rates pool it unless a view is filtered.
 - 2026 is seven months. Marketed codeshares may be included and cannot be split out.
 - Blank delay fields are not zero. Cause minutes exist only on late arrivals.
 - `WeatherDelay` is not every weather-related minute.
 - Origin and destination are separate. Counting both would double-count flights.
 - Average minutes use the floored delay field.
-- The forecast’s average miss is 2.31 percentage points. Individual months, especially April 2026 and July 2026, miss by more.
+- The workbook compares coverage of attention lists. It does not estimate the effect of a management action.
 - The quartile flags describe this network. They are not a score that can be compared with another airline.

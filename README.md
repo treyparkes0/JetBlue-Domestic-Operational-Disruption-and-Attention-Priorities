@@ -16,7 +16,7 @@ From January 2018 through July 2026, JetBlue reported 2,110,783 domestic flights
 
 Half of arrival-delay minutes sit at five origins: JFK, Boston, Fort Lauderdale, Orlando, and San Juan. Boston flies more than JFK and has a better late-arrival rate. JFK still has more minutes. Fort Lauderdale and Orlando combine a rate near 30% with a large base. Miami is the main reliability watch item that is not in the top 10 by minutes: 13,280 flights and a 34.3% late-arrival rate.
 
-Sunday is the worst day. Friday is the busiest. July is the heaviest month. On flights that were already late, carrier delay plus late-aircraft delay is 76.4% of recorded cause minutes. That split is not a claim that the minutes were avoidable.
+Sunday is the worst day. Friday is the busiest. July is the heaviest month. Both still lead with 2020 removed. On flights that were already late, carrier delay plus late-aircraft delay is 76.4% of recorded cause minutes. That split is a reporting association on flights that were already late.
 
 The full argument is in `Documentation/EXECUTIVE_DECISION_MEMO.md` and `Documentation/FINDINGS.md`.
 
@@ -27,11 +27,21 @@ The full argument is in `Documentation/EXECUTIVE_DECISION_MEMO.md` and `Document
 - High rate with a real route base: MCO → EWR 35.9% on 14,407 flights, FLL → EWR 35.8% on 10,993 flights.
 - Sunday: 29.5% late, 2.88% cancelled, 7.37 million minutes. Wednesday: 23.5% late.
 - Cancellation codes: weather 36.1%, carrier 28.6%, NAS 22.0%, security 13.3%. Almost all security-coded cancellations are March–April 2020.
-- Forecast, August 2026–July 2027: 280,987 flights, 10,716 baseline cancellations. Assumed 5/10/15% cuts avoid 536 / 1,072 / 1,607 cancellations. Holdout error is 2.31 percentage points. These are not savings.
+- The attention list is the first five origins by arrival-delay minutes: JFK, Boston, Fort Lauderdale, Orlando, and San Juan. They cover 22,045,754 minutes (49.9%) and 1,065,139 flights (50.5%). The five highest late-arrival rates cover 75,342 minutes (0.17%).
 
 ## Technology stack
 
-Python and pandas for the extract and the exploratory checks. Databricks SQL, catalog `jetblue_capstone`. dbt Core for the views and tests, schema `dbt_dev`. Excel for the cancellation forecast and the scenarios. Power BI is the planned presentation layer and is not built.
+Each tool has one job. The analysis is complete.
+
+| Tool | Job |
+| --- | --- |
+| Python `src/filter_jetblue.py` | Read the monthly BTS zips, keep `Reporting_Airline` = `B6`, write `data/raw/jetblue_b6.csv`. |
+| Python `src/jetblue_eda.py` | Check the extract and produce the exploratory tables that `FINDINGS.md` was reconciled against. |
+| Databricks `jetblue_capstone.views.flight_performance` | Flight-level store the models read. |
+| dbt `jetblue_capstone.dbt_dev` | One tested view per analytical grain, including the priority flags. |
+| dbt `jetblue_capstone.powerbi_star` | Flight fact and the dimensions the dashboard uses. |
+| Excel `Jetblue_sensitivity_analysis.xlsx` | Compare attention lists on the origin extract. |
+| Power BI `Jetblue_Final_analysis.pbix` | The finished dashboard. |
 
 ## Data source
 
@@ -44,16 +54,16 @@ flowchart LR
   bts[BTS monthly files]
   py[Python extract and checks]
   dbx[Databricks SQL flight_performance]
-  dbt[dbt views and tests in dbt_dev]
-  xl[Excel forecast and scenarios]
-  pbi[Power BI not built]
+  dbt[dbt views and tests]
+  star[powerbi_star]
+  xl[Excel attention lists]
+  pbi[Power BI dashboard]
   bts --> py --> dbx --> dbt
+  dbt --> star --> pbi
   dbt --> xl
-  dbt --> pbi
-  xl --> pbi
 ```
 
-`jetblue_capstone.views.flight_performance` is the flight-level source the models read. dbt writes the analytical views to `jetblue_capstone.dbt_dev`. Copies of some views also exist in the `views` schema. Those copies are not what dbt builds.
+`jetblue_capstone.views.flight_performance` is the flight-level source the models read. dbt writes the analytical views to `jetblue_capstone.dbt_dev` and the dashboard model to `jetblue_capstone.powerbi_star`. Copies of some views also exist in the `views` schema. Those copies are not what dbt builds.
 
 ## Analytical methodology
 
@@ -61,18 +71,18 @@ Operated flights are the late-arrival denominator. All scheduled flights are the
 
 Origins need at least 1,000 flights to enter the main ranking. Directed routes need at least 500. JFK → FLL and FLL → JFK are different routes. Origin and destination roles stay separate.
 
-2020 is labeled and is excluded from the forecast fit. 2026 is January–July only. The rules are in `Documentation/METHODOLOGY.md`.
+2020 is labeled wherever a rate is pooled. 2026 is January–July only. The rules are in `Documentation/METHODOLOGY.md`.
 
-## Forecasting and scenario analysis
+## Attention lists
 
-`Jetblue_Analysis.xlsx`.
+`Jetblue_sensitivity_analysis.xlsx` reads the origin ranking and compares lists.
 
-- `Raw_Data` holds the 103 months.
-- `Forecast` fits flights and the cancellation rate from January 2021 through July 2026 with `FORECAST.ETS`, seasonality 12, and projects August 2026 through July 2027. Baseline cancellations are flights times the rate.
-- The holdout, August 2025–July 2026, misses by 2.31 percentage points on average.
-- `Scenario` and `Scenario_Summary` hold forecast flights fixed and apply 5%, 10%, and 15% cuts to cancellations. Avoided cancellations are a count.
+- `Raw Data` is the origin extract: one row per origin, with flights, rates, minutes, and the priority flags.
+- `Airports` looks up that extract and ranks each origin by arrival-delay minutes and by late-arrival rate.
+- `Scenario` compares five ways to choose a list. The plan is the first five origins by minutes.
+- `Scorecard` puts that minutes list beside the five highest late-arrival rates.
 
-There is no dollar conversion.
+On the current workbook the first five cover 22,045,754 minutes (49.9%), 1,065,139 flights (50.5%), and 24,551 cancellations (48.4%). The five highest late-arrival rates cover 75,342 minutes (0.17%) on 2,340 flights. That rate list has no volume floor, so it includes airports `origin_priority` leaves off. Newark is the largest minute airport left off the five. LaGuardia is the cancellation airport left off the five. There is no dollar conversion.
 
 ## Operational prioritization
 
@@ -89,41 +99,43 @@ On the current build the origin cutoffs are 29.59% late and 3.06% cancelled. The
 ```text
 src/filter_jetblue.py          Keep B6 from the monthly zips
 src/jetblue_eda.py             Quality checks and the exploratory tables
-models/                        dbt views
+models/                        dbt analytical views and the Power BI star
 tests/                         dbt tests, including the locked counts
-Jetblue_Analysis.xlsx          Forecast and scenarios
+Jetblue_sensitivity_analysis.xlsx          Attention-list comparison
+Jetblue_Final_analysis.pbix    Finished dashboard
 Documentation/                 Audit, dictionary, methodology, findings, memo
 data/raw/                      Local BTS files. Not in git
 ```
 
 Views in `dbt_dev`: `monthly_performance`, `airport_month`, `route_month`, `delay_causes`, `weekday_performance`, `cancellation_reason`, `origin_priority`, `route_priority`.
 
-Two files in `data/` are old query downloads. They are not the system of record. `Jet_Blue_Operations_and_Strategy_Analytics__1_.csv` is a partial airport export.
+Views in `powerbi_star`: `fact_flight`, `dim_month`, `dim_weekday`, `dim_origin`, `dim_route`. The dimensions carry keys and the priority flags. Flight counts stay on `fact_flight`.
 
 ## Reproduce the analysis
 
 1. Put the official monthly zips in `data/raw/`.
 2. Run `python src/filter_jetblue.py`, then `python src/jetblue_eda.py`. The script expects the local Windows paths at the top of each file. It rewrites `data/raw/jetblue_b6_clean.csv` only after the audit checks pass.
 3. Load the flight-level table behind `jetblue_capstone.views.flight_performance`. That load is already done in this workspace.
-4. From this folder, with the dbt profile `jetblue`, run `dbt build`. The target schema is `dbt_dev`.
-5. Refresh `Raw_Data` in the workbook from `monthly_performance` if the warehouse changes. The forecast formulas read that sheet.
+4. From this folder, with the dbt profile `jetblue`, run `dbt build`. Analytical views land in `dbt_dev`. The star lands in `powerbi_star`.
+5. `Raw Data` in the workbook is the origin extract. `Airports`, `Scenario`, and `Scorecard` read that sheet.
 
-`dbt build` on 2 November 2026 passed 8 views and 11 tests.
+`dbt build` on 8 November 2026 passed 13 views and 37 tests: the 8 analytical views in `dbt_dev` and the 5 dashboard views in `powerbi_star`. July 2023, the origin ranking, and MCO → JFK still match `FINDINGS.md`.
 
 ## Limitations
 
-No passengers, fares, crew, maintenance, or independent weather. No causal claim and no dollar saving. 2020 is not a normal year. 2026 cannot be split into operated and marketed codeshare flights and cannot be annualized. Blank cause minutes are not zeros. The Power BI report is not part of this repository.
+No passengers, fares, crew, maintenance, or independent weather. No causal claim and no dollar saving. 2020 is not a normal year. 2026 cannot be split into operated and marketed codeshare flights and cannot be annualized. Blank cause minutes are not zeros. The workbook compares lists. It does not estimate the effect of a program.
 
-## Where to start in Power BI
+## Dashboard
 
-Import from `jetblue_capstone.dbt_dev`, not from `views`, and not from the 2.1 million-row flight file.
+`Jetblue_Final_analysis.pbix` is the finished report. It reads `jetblue_capstone.powerbi_star` (`Fact_Flight`, `Dim_Month`, `Dim_Weekday`, `Dim_Origin`, `Dim_Route`) and uses `origin_priority` on the Overview and Attention pages. Rates are measures on the flight fact: summed late arrivals divided by summed operated flights, and summed cancellations divided by summed flights. `delay_causes` stays in `dbt_dev` as the cause-minute check. The report does not use it.
 
-Use `monthly_performance`, `airport_month`, `route_month`, `weekday_performance`, `cancellation_reason`, `origin_priority`, and `route_priority`. Cause minutes are already on the aggregate views, so the dashboard does not need `delay_causes`.
+| Page | What it shows |
+| --- | --- |
+| Overview | Flights, late-arrival rate, cancellation rate, diversion rate, and the high-impact origins. |
+| Three Events | Late arrivals, cancellations, and diversions kept separate, including the ten busiest origins. |
+| Minutes | Arrival-delay minutes by origin and by directed route. |
+| Rate and Size | Late-arrival rate beside flight volume, and the elevated cancellation flag. |
+| Patterns | Weekday, month, and the five delay-cause buckets. |
+| Attention | High accumulated impact, monitoring origins, and elevated late-arrival routes. |
 
-Do not average the stored rate columns. Late-arrival rate is `DIVIDE` of summed late arrivals by summed operated flights. Cancellation rate is `DIVIDE` of summed cancellations by summed flights. Build the date as `DATE(Flight_Year, Flight_Month, 1)`.
-
-Filter airports to `Role = 'Origin'`. Label a route as origin to destination, and do not combine the two directions. Mark 2020 as not comparable and 2026 as January–July only.
-
-A useful check card is July 2023: 22,853 flights, 21,108 operated, 9,794 late arrivals, 1,564 cancellations.
-
-For the scenario page, use the Excel horizon rather than rebuilding `FORECAST.ETS` in DAX. The 12-month totals are 280,987 flights, 10,716 baseline cancellations, and 536 / 1,072 / 1,607 cancellations avoided. Show the 2.31 percentage-point holdout miss next to them.
+The attention-list comparison stays in the workbook. The report does not rebuild it.

@@ -3,17 +3,116 @@ version: 2
 models:
   - name: monthly_performance
     description: One row per year and month. Late-arrival rate uses operated flights. Cancellation rate uses every flight. Do not average the stored rate columns.
+    columns:
+      - name: Year_Month_Key
+        description: Flight_Year * 100 + Flight_Month. One value per row. Month slicer key for airport_month, route_month, cancellation_reason, and delay_causes.
+        data_tests:
+          - unique
+          - not_null
   - name: airport_month
     description: One row per airport, year, month, and role. Origin and destination stay separate. Do not average the stored rate columns.
+    columns:
+      - name: Year_Month_Key
+        description: Foreign key to monthly_performance. Filters this view to the selected month.
+        data_tests:
+          - not_null
+      - name: Airport_ID
+        description: Foreign key to origin_priority. Use origin_priority as the airport slicer. Its measures stay full-window origin totals, including when a destination row shares the airport.
+        data_tests:
+          - not_null
   - name: route_month
     description: One row per directed origin-destination pair, year, and month. Do not average the stored rate columns.
+    columns:
+      - name: Year_Month_Key
+        description: Foreign key to monthly_performance.
+        data_tests:
+          - not_null
+      - name: Route_Key
+        description: Origin_Airport, a hyphen, then Destination_Airport. Foreign key to route_priority. The reverse direction is a different key.
+        data_tests:
+          - not_null
   - name: delay_causes
     description: Late arrivals only. Blank cause minutes stay blank. The dashboard does not need this view. Cause minutes are already summed on monthly_performance and airport_month.
+    columns:
+      - name: Year_Month_Key
+        description: Foreign key to monthly_performance. This view has no primary key.
+        data_tests:
+          - not_null
   - name: weekday_performance
     description: One row per day of week for the full window, Monday = 1 through Sunday = 7. Pools 2020. Late-arrival rate uses operated flights. Cancellation rate uses every flight. Do not average the stored rate columns.
+    columns:
+      - name: Day_of_Week
+        description: Primary key. No other view carries this column, so this view stays on its own page.
+        data_tests:
+          - unique
+          - not_null
   - name: cancellation_reason
     description: Cancelled flights only, one row per year, month, and cancellation code. A carrier, B weather, C national air system, D security. A blank code would be labeled Unknown. This is not a delay-minute split.
+    columns:
+      - name: Year_Month_Key
+        description: Foreign key to monthly_performance.
+        data_tests:
+          - not_null
   - name: origin_priority
     description: One row per origin for the full window. High accumulated impact is the 10 origins with the most arrival-delay minutes among origins with at least 1,000 flights. Elevated flags are the top quartile of late-arrival rate or cancellation rate inside that same volume floor. Monitoring is 250 to 999 flights with a late-arrival rate at or above that quartile. Flags can overlap. There is no weighted score.
+    columns:
+      - name: Airport_ID
+        description: Primary key. Airport slicer for airport_month.
+        data_tests:
+          - unique
+          - not_null
   - name: route_priority
     description: One row per directed route for the full window. High accumulated impact is the 10 routes with the most arrival-delay minutes among routes with at least 500 flights. Elevated flags use the top quartile inside that floor. Monitoring is 250 to 499 flights with a late-arrival rate at or above that quartile. The reverse direction is a different route. There is no weighted score.
+    columns:
+      - name: Route_Key
+        description: Origin_Airport, a hyphen, then Destination_Airport. Primary key. Route slicer for route_month.
+        data_tests:
+          - unique
+          - not_null
+  - name: fact_flight
+    description: One row per flight from jetblue_capstone.views.flight_performance. Power BI fact table in jetblue_capstone.powerbi_star.
+    columns:
+      - name: Year_Month_Key
+        description: Flight_Year * 100 + Flight_Month. Relates to dim_month.
+        data_tests:
+          - not_null
+      - name: Day_of_Week
+        description: Monday = 1 through Sunday = 7. Relates to dim_weekday.
+        data_tests:
+          - not_null
+      - name: Origin_Airport_ID
+        description: Relates to dim_origin.
+        data_tests:
+          - not_null
+      - name: Route_Key
+        description: Origin code, a hyphen, destination code. Relates to dim_route.
+        data_tests:
+          - not_null
+  - name: dim_month
+    description: One row per year and month. Dimension for fact_flight.
+    columns:
+      - name: Year_Month_Key
+        data_tests:
+          - unique
+          - not_null
+  - name: dim_weekday
+    description: Monday = 1 through Sunday = 7. Dimension for fact_flight.
+    columns:
+      - name: Day_of_Week
+        data_tests:
+          - unique
+          - not_null
+  - name: dim_origin
+    description: One row per origin. Full-window priority flags only. Flight counts stay on fact_flight.
+    columns:
+      - name: Airport_ID
+        data_tests:
+          - unique
+          - not_null
+  - name: dim_route
+    description: One row per directed route. Full-window priority flags only. Flight counts stay on fact_flight.
+    columns:
+      - name: Route_Key
+        data_tests:
+          - unique
+          - not_null

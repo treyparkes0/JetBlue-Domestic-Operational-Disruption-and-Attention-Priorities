@@ -2,7 +2,7 @@
 
 **To:** Director, airline operations  
 **From:** Trey Parkes  
-**Date:** 2 November 2026  
+**Date:** 8 November 2026  
 **Source:** U.S. Bureau of Transportation Statistics, Reporting Carrier On-Time Performance, JetBlue (`B6`) only. Public data. Not an internal JetBlue extract.  
 **Window:** 1 January 2018–31 July 2026. 2,110,783 domestic flights.
 
@@ -42,9 +42,9 @@ Six origins between 250 and 999 flights have late-arrival rates in the same rang
 
 ## What travels with the disruption
 
-**Day of week.** Sunday is the worst day in this file: 29.5% late, 2.88% cancelled, and 7.37 million minutes. Friday is the busiest day, at 314,540 flights and 28.6% late. Wednesday is the most reliable, at 23.5% late, and it is not the lightest day. Saturday is the lightest. A schedule review that assumes the busiest day is the problem, or that the quietest day is the recovery day, does not match these counts.
+**Day of week.** Sunday is the worst day in this file: 29.5% late, 2.88% cancelled, and 7.37 million minutes. With 2020 removed, Sunday still leads, at 30.8% late, 2.79% cancelled, and 7.18 million minutes. Friday is the busiest day, at 314,540 flights and 28.6% late. Wednesday is the most reliable, at 23.5% late, and it is not the lightest day. Saturday is the lightest. A schedule review that assumes the busiest day is the problem, or that the quietest day is the recovery day, does not match these counts.
 
-**Season.** July is the heaviest month on both the late-arrival rate (33.6%) and the minutes. October is the lightest late-arrival month (21.1%). March’s cancellation rate is high because 2020 is in the pool. July 2023 and July 2026 were severe individual months. April 2020 was a cancellation month, at 35.8%, on a shrunken schedule.
+**Season.** July is the heaviest month on both the late-arrival rate (33.6%) and the minutes. With 2020 removed, July still leads, at 34.9% late and 5.67 million minutes. October is the lightest late-arrival month (21.1%). March’s cancellation rate is high because 2020 is in the pool. With 2020 removed, January is the cancellation month, at 4.22%. July 2023 and July 2026 were severe individual months. April 2020 was a cancellation month, at 35.8%, on a shrunken schedule.
 
 **Causes.** On late arrivals, late aircraft is 39.2% of cause minutes and carrier is 37.2%. NAS is 20.7%. The weather bucket is 2.7%, and that bucket is extreme weather only, not every weather minute inside NAS. Security delay minutes are 0.2%.
 
@@ -60,9 +60,11 @@ Six origins between 250 and 999 flights have late-arrival rates in the same rang
 
 Do not start with the March–April 2020 security codes, with airports under 250 flights, or with a network-wide claim that a single change will cut the 76.4% controllable share.
 
-## What the forecast is for
+## What the workbook adds
 
-The workbook projects the cancellation rate from January 2021 through July 2026, leaving 2020 out of the fit, through July 2027. The baseline is 280,987 flights and 10,716 cancellations. A 5%, 10%, or 15% reduction, with flights held fixed, avoids 536, 1,072, or 1,607 cancellations. Over the year before the horizon, the same method missed by 2.31 percentage points on average, and it missed April 2026 and July 2026 by more. Use it as a planning range. It is not a saving, and it is not evidence that a program will deliver the cut.
+`Jetblue_sensitivity_analysis.xlsx` compares ways to draw the attention list. It uses the origin ranking already in this memo. The plan, the first five origins by minutes, covers 22,045,754 minutes (49.9% of the network), 1,065,139 flights (50.5%), and 24,551 cancellations (48.4%). The five highest late-arrival rates cover 75,342 minutes (0.17%) on 2,340 flights, at a 35.8% late-arrival rate. Newark is the next airport by minutes. LaGuardia is the cancellation airport that list leaves off. Extending the minutes list to ten origins reaches 65.4% of minutes.
+
+Use the workbook to see what a different list would cover. It is not a saving, and it is not evidence that a program will deliver a cut.
 
 ## What this cannot establish
 

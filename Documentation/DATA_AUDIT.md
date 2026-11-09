@@ -6,7 +6,7 @@
 
 **Call: GO.** Every field the project needs is in the flight-level file. The measured JetBlue extract covers 1 January 2018 through 31 July 2026, which is the latest month posted. No required field is absent. The extract is domestic only. Do not read it as international coverage.
 
-This file review was completed on 8 October 2026. Current status of the views, the forecast, and the priority framework is in `METHODOLOGY.md`.
+This file review was completed on 8 October 2026. The completed views, workbook, dashboard, and priority framework are in `METHODOLOGY.md`.
 
 ## Dataset
 
@@ -297,13 +297,13 @@ What was read instead:
 
 Yes, with citation and with the limits above.
 
-The table is a public BTS release of Form 234 on-time reports. The table profile, field list, and download form did not present a paid license or a bar on academic use. The measured files were not added to git. A later write-up should cite Bureau of Transportation Statistics, Reporting Carrier On-Time Performance (1987-present), and should state the window 2018-01 through 2026-07 and the filter `Reporting_Airline` = `B6`.
+The table is a public BTS release of Form 234 on-time reports. The table profile, field list, and download form did not present a paid license or a bar on academic use. The measured files were not added to git. The write-up cites Bureau of Transportation Statistics, Reporting Carrier On-Time Performance (1987-present), states the window 2018-01 through 2026-07, and states the filter `Reporting_Airline` = `B6`.
 
 The file is fit to describe and model domestic schedule disruption. It is not fit to stand in for international flying, for profit, or for a cause more specific than the five delay buckets and the four cancellation codes.
 
 ## Feasibility
 
-The later question is where domestic operational risk is concentrated, what is associated with it, and where management should focus. “Risk” in this file can mean reported disruption: cancellation, diversion, arrival delay, the 15-minute flags, and the cause mix. It cannot mean international exposure, dollar loss, or safety incidents.
+The question is where domestic operational risk is concentrated, what is associated with it, and where management should focus. “Risk” in this file can mean reported disruption: cancellation, diversion, arrival delay, the 15-minute flags, and the cause mix. It cannot mean international exposure, dollar loss, or safety incidents.
 
 | Use | Call | Why |
 | --- | --- | --- |
@@ -314,10 +314,10 @@ The later question is where domestic operational risk is concentrated, what is a
 | Seasonal analysis | GO | `FlightDate`, `Month`, and `DayOfWeek` are complete, and the window covers more than eight summers and winters. |
 | Operational risk scoring | GO, for domestic disruption | The file can rank airports, routes, and seasons by cancellation, diversion, arrival delay, and cause mix, and it is large enough to do that. It cannot score Mexico, the rest of the Caribbean, cost, or safety. |
 
-**Overall: GO.** Nothing required is missing. The file can support the business question inside the domestic scope that was decided. It does not answer where management should focus. That answer is later work.
+**Overall: GO.** Nothing required is missing. The file can support the business question inside the domestic scope that was decided. The completed answer is in `FINDINGS.md`. The project used the descriptive, seasonal, airport, route, and ranking uses. It did not build the predictive model this table marks as feasible.
 
 **Not a STOP.** A STOP would require a missing field, an empty JetBlue extract, or a file that could not see airports, routes, time, and disruption. None of those is true.
 
-## What was not done
+## What this audit did not build
 
-No ingestion pipeline, database, dbt project, model, Excel workbook, Power BI report, or AWS resource was built. Raw monthly extracts are not in the repository. This document is the Phase 1 audit only.
+This document is the 8 October 2026 file review. The extract, the dbt views, the Excel workbook, and the Power BI report were built after it. Their status is in `METHODOLOGY.md`. Raw monthly extracts are not in the repository. The finished project has no predictive model, no peer airline, no T-100 join, and no independent weather feed.

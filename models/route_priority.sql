@@ -43,6 +43,7 @@ ranked as (
   where Total_Flights >= 500
 )
 select
+  concat(r0.Origin_Airport, '-', r0.Destination_Airport) as Route_Key,
   r0.Origin_Airport,
   r0.Destination_Airport,
   r0.Total_Flights,

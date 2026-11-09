@@ -40,6 +40,7 @@ with airport_flights as (
   from jetblue_capstone.views.flight_performance
 )
 select
+  Flight_Year * 100 + Flight_Month as Year_Month_Key,
   Flight_Year,
   Flight_Month,
   Role,

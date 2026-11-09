@@ -1,6 +1,7 @@
 {{ config(materialized='view') }}
 
 select
+  Flight_Year * 100 + Flight_Month as Year_Month_Key,
   Flight_Date,
   Flight_Year,
   Flight_Month,

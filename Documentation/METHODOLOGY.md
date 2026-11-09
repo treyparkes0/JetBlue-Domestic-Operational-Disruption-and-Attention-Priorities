@@ -15,16 +15,13 @@ Nothing here is a causal estimate. An association between a schedule attribute a
 - **Blanks.** A blank cause minute is not zero. Cause-minute KPIs use only rows where BTS populated the cause.
 - **Priority idea.** Priority is risk with volume: delay minutes on busy places, read beside the delay rate. There is no weighted score. The written rules are in the priority framework below and in `origin_priority` and `route_priority`.
 - **Window.** Flight dates 1 January 2018 through 31 July 2026. That is 103 consecutive months. The window stays this full span. See time handling.
-- **Stack.** Python cleans the extract and produced the exploratory pass. Databricks SQL in catalog `jetblue_capstone` holds the analysis views. dbt Core organizes, tests, and documents those SQL models. Excel holds one forecast metric and scenarios. Power BI is the dashboard. There is no machine-learning model and no peer airline.
+- **Stack.** Python cleans the extract and produced the exploratory pass. Databricks SQL in catalog `jetblue_capstone` holds the flight file. dbt Core builds the tested views in `dbt_dev` and the dashboard model in `powerbi_star`. Excel compares attention lists. Power BI is the finished dashboard, `Jetblue_Final_analysis.pbix`. There is no machine-learning model, no forecast, and no peer airline.
 
-## Open decisions
+## Closed decisions
 
 Late arrival stays `ArrDel15` = 1. Cancellation, diversion, and arrival delay stay separate. There is no second “severe disruption” minute cutoff.
 
-Still open:
-
-- A coarser season bucket. `Month` and `DayOfWeek` are the locked calendar units. Weekday results are in `weekday_performance`. The calendar-month table pools every year, including 2020.
-- A weighted risk score. None is used. Any later score writes its weights down before use.
+`Month` and `DayOfWeek` are the calendar units. Weekday results are in `weekday_performance`. The calendar-month table pools every year, including 2020. There is no coarser season bucket and no weighted risk score.
 
 ## Priority framework
 
@@ -123,16 +120,17 @@ Cancelled flights are classified with `CancellationCode` (`A` carrier, `B` weath
 | Load of the official monthly downloads, keeping `B6` | Done in Python | No scraper. The form does not filter to JetBlue. Raw flight files are not committed. The warehouse is Databricks catalog `jetblue_capstone`. |
 | Exploratory analysis | Done | See `FINDINGS.md`. Rank delay minutes with volume. Keep controllable minutes separate from weather, NAS, and security. |
 | SQL views | Done | Eight views in `jetblue_capstone.dbt_dev`: `monthly_performance`, `airport_month`, `route_month`, `delay_causes`, `weekday_performance`, `cancellation_reason`, `origin_priority`, and `route_priority`. Use that schema. Copies in `jetblue_capstone.views` are not part of the dbt project. |
-| dbt | Done | `dbt build` on 2 November 2026 passed 8 views and 11 tests. July 2023 remains 22,853 flights, 21,108 operated, 9,794 late arrivals, 1,564 cancellations, and 1,085,438 arrival-delay minutes. Origin minutes for JFK, Boston, Fort Lauderdale, Orlando, and San Juan match `FINDINGS.md`. |
+| dbt | Done | `dbt build` on 8 November 2026 passed 13 views and 37 tests. That is the 8 analytical views in `dbt_dev` and the 5 dashboard views in `powerbi_star`. July 2023 remains 22,853 flights, 21,108 operated, 9,794 late arrivals, 1,564 cancellations, and 1,085,438 arrival-delay minutes. Origin minutes for JFK, Boston, Fort Lauderdale, Orlando, and San Juan match `FINDINGS.md`. |
 | Weekday and cancellation mix | Done | `weekday_performance` and `cancellation_reason`. Cancellation codes stay separate from delay minutes. |
 | Risk scores | Not used | No weights. The priority framework above is the ranking method. |
 | Strategic priority list | Done | `origin_priority` and `route_priority`. First attention remains JFK, Boston, Fort Lauderdale, Orlando, and San Juan. The origin rollup of `dbt_dev.airport_month` matched those minute totals on 2 November 2026. |
-| Excel forecast and scenarios | Done | Cancellation rate. Fit on January 2021 through July 2026. Horizon August 2026 through July 2027. No dollar figure. 2020 and January–July 2026 stay labeled. The 2018 pivot on `Sheet3` was removed on 2 November 2026 because it summed late-arrival rates. Forecast formulas were not changed. Workbook is `Jetblue_Analysis.xlsx`. |
-| Power BI dashboard | Not started | Reads `dbt_dev` and the Excel scenario results. Do not average the rate columns stored on the views. |
+| Excel attention lists | Done | `Jetblue_sensitivity_analysis.xlsx`. `Raw Data` is the origin extract. `Airports` ranks origins by minutes and by late-arrival rate. `Scenario` compares five list rules. The plan is the first five origins by minutes. `Scorecard` sets that list beside the five highest late-arrival rates. No dollar figure and no forecast. 2020 and January–July 2026 stay labeled. |
+| Power BI star | Done | `fact_flight`, `dim_month`, `dim_weekday`, `dim_origin`, and `dim_route` in `jetblue_capstone.powerbi_star`. Counts stay on the fact. Flags stay on the origin and route dimensions. |
+| Power BI dashboard | Done | `Jetblue_Final_analysis.pbix`. Pages: Overview, Three Events, Minutes, Rate and Size, Patterns, Attention. Rates are measures on `Fact_Flight`. `origin_priority` is used on Overview and Attention. The workbook comparison is not rebuilt in the report. |
 | Recommendations | Written | `FINDINGS.md` and `EXECUTIVE_DECISION_MEMO.md`. Claims stay inside `BUSINESS_PROBLEM.md`. |
 
 Left off the core path: Census attributes, T-100, Monte Carlo simulation, an independent weather feed, a peer airline, a machine-learning model, and any severe-disruption minute cutoff.
 
-## What remains
+## Completed project
 
-Python, the dbt views, the priority framework, and the Excel scenarios are done. Power BI is not built. The cleaned flight file stays local. Use `jetblue_capstone.dbt_dev`, not the copies in `jetblue_capstone.views`. The audit’s overall call remains GO for domestic disruption inside the limits above. The ranking in `FINDINGS.md` is the `dbt_dev` ranking.
+The analysis is complete. Python, the dbt views, the priority framework, the Excel workbook, and the Power BI report are done. The cleaned flight file stays local. Published rankings come from `jetblue_capstone.dbt_dev`. The dashboard reads `jetblue_capstone.powerbi_star`. Copies in `jetblue_capstone.views` are not the dbt build. The audit’s overall call remains GO for domestic disruption inside the limits above. The ranking in `FINDINGS.md` is the `dbt_dev` ranking.

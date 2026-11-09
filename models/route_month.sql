@@ -1,6 +1,8 @@
 {{ config(materialized='view') }}
 
 select
+  Flight_Year * 100 + Flight_Month as Year_Month_Key,
+  concat(Origin_Airport, '-', Destination_Airport) as Route_Key,
   Flight_Year,
   Flight_Month,
   Origin_Airport_ID,

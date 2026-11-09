@@ -18,15 +18,15 @@ Fields confirmed in `DATA_AUDIT.md` (reviewed 8 October 2026) for the JetBlue do
 
 Domestic, in the table profile, is the 50 states, the District of Columbia, Puerto Rico, and the U.S. Virgin Islands. Every origin state and destination state on these rows is inside that set.
 
-Two later grains are defined in `METHODOLOGY.md` and are not rows in this file: JetBlue × airport × month, and JetBlue × directed route × month.
+Two summary grains are defined in `METHODOLOGY.md` and are not rows in this file: JetBlue × airport × month, and JetBlue × directed route × month.
 
 ## How to read the role column
 
 | Role | Meaning |
 | --- | --- |
-| Pre-flight | Known from the scheduled operation or the calendar. Allowed as a later model input. |
-| Post-flight outcome | Produced by the operation. Not a model input. |
-| Cause | Reported reason. Populated only when BTS requires it. Also an outcome, so not a model input. |
+| Pre-flight | Known from the scheduled operation or the calendar. |
+| Post-flight outcome | Produced by the operation. |
+| Cause | Reported reason. Populated only when BTS requires it. It is also an outcome. |
 
 A blank cell is empty. It is not a second code for zero. A populated zero is stored as `0.00`.
 
@@ -149,7 +149,7 @@ Signed delay and non-negative delay minutes answer different questions. Early fl
 | `ArrDelay`, `ArrDel15` on cancelled and diverted rows | Blank by rule. Unusable as on-time or as late. |
 | `DepDelay`, `DepTime`, `DepDel15` on cancelled rows with no departure time | Blank. 1,335 cancelled rows still have those departure fields. |
 | Diversion-detail columns through `Div5` | The 109 names match the field list, including the `Div5` fields. The audit did not measure those columns. `DivArrDelay` is cited only for the rule that `ArrDelay` stays null on diverted flights. Those columns are not cleared for use. |
-| Taxi fields | Not in the verified field list. Not cleared for use. If a later phase finds taxi times in the unverified columns, they are outcomes. |
+| Taxi fields | Not in the verified field list. Not used. |
 | History before January 2018 | On the table profile, back to 1987. Not downloaded. Not in this dictionary’s extract. |
 | International airports | Not in the JetBlue rows. Mexico and the rest of the Caribbean are absent. |
 
@@ -171,4 +171,4 @@ Directed routes: 718. Routes flown in both directions: 356. Routes flown in one 
 
 ## What this dictionary does not do
 
-It does not authorize the other columns in the 109 as model inputs. It does not set a severe-disruption minute cutoff. It does not treat cancellation, diversion, and arrival delay as one field.
+It does not clear the other columns in the 109 for analysis. It does not set a severe-disruption minute cutoff. It does not treat cancellation, diversion, and arrival delay as one field. The finished project has no predictive model, so none of these fields is a model input.
