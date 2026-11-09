@@ -1,4 +1,4 @@
-# JetBlue Operational Performance and Strategic Risk Analytics
+# JetBlue Domestic Operational Disruption and Attention Priorities
 
 Graduate capstone for the MS in Business Analytics at Hofstra University.
 
