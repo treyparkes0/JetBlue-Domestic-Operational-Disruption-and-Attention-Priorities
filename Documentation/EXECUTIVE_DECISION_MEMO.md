@@ -48,17 +48,17 @@ Six origins between 250 and 999 flights have late-arrival rates in the same rang
 
 **Causes.** On late arrivals, late aircraft is 39.2% of cause minutes and carrier is 37.2%. NAS is 20.7%. The weather bucket is 2.7%, and that bucket is extreme weather only, not every weather minute inside NAS. Security delay minutes are 0.2%.
 
-**Cancellations.** Weather is the largest cancellation code (36.1%), then carrier (28.6%) and NAS (22.0%). The security code is 13.3% of cancellations only because 6,749 of those 6,756 flights were cancelled in March and April 2020, across the large origins. One security-coded cancellation appears after 2020. It is not a current security pattern. January is the weather-cancellation month. July is the NAS-cancellation month. In the partial 2026 year, weather is about half of cancellations so far.
+**Cancellations.** Weather is the largest cancellation code (36.1%), then carrier (28.6%) and NAS (22.0%). The security code is 13.3% of cancellations only because 6,755 of those 6,756 flights were cancelled in 2020. Of those, 6,749 are March and April, and six are in July, across the large origins. One security-coded cancellation appears after 2020, in May 2023. It is not a current security pattern. January is the weather-cancellation month. July is the NAS-cancellation month. In the partial 2026 year, weather is about half of cancellations so far.
 
 ## What to investigate first
 
-1. **JFK and Boston turns and late-aircraft flow.** These two origins hold 12.8 million arrival-delay minutes. The cause mix on late flights points at late aircraft and carrier before it points at the extreme-weather bucket. Boston’s better rate is part of the question, not a reason to skip Boston.
-2. **Fort Lauderdale, Orlando, and the Florida–New York routes, in July, then August and December.** This is where rate and minutes coincide. July is the heaviest month. With 2020 removed, August and December both round to 32.0% late, and August has more minutes. Include MCO → EWR and FLL → EWR in that review.
-3. **Sunday operation, then Friday.** Sunday combines the worst rate with the most minutes. Friday is the volume day just behind it.
-4. **Miami as a station review.** The rate is high on a base large enough to trust, and the minute total is not large enough to put it ahead of the five origins above.
-5. **LaGuardia cancellations, kept separate from late arrivals.**
+1. **Review JFK and Boston first.** Together they hold 12.8 million arrival-delay minutes, 29% of the network’s 44.2 million. JFK has 317,477 flights and a 27.8% late-arrival rate. Boston has 350,117 flights and a 25.4% late-arrival rate. Boston flies more and is late less often. JFK still has more minutes. Ask whether turns and late aircraft explain that gap. The file does not show that cause. On late flights, the recorded mix is 39.2% late aircraft and 37.2% carrier. That mix does not prove those minutes were avoidable.
+2. **Review MCO → JFK, MCO → EWR, and FLL → EWR in July, then August.** MCO → JFK is 22,110 flights, 31.8% late, and 612,862 minutes. MCO → EWR is 14,407 flights, 35.9% late, and 434,041 minutes. FLL → EWR is 10,993 flights, 35.8% late, and 299,164 minutes. July is first for the network and for these three routes together. August is second. Leave December off this list. June has more of these routes’ minutes than December does. For FLL → EWR, also look at April. April has more of that route’s minutes than July. July has the higher late-arrival rate.
+3. **Review Sunday, then Friday.** Sunday has 312,745 flights, a 29.5% late-arrival rate, and 7.37 million minutes. Friday is the busiest day, with 314,540 flights, a 28.6% late-arrival rate, and 6.95 million minutes.
+4. **Review Miami for late arrivals.** 34.3% of Miami flights arrive late, on 13,280 flights. Miami is 22nd by total minutes, so this is a reliability review, not a minute review.
+5. **Review LaGuardia for cancellations.** 2,168 of 65,340 flights were cancelled, 3.32%. LaGuardia is 7th by total minutes and the only top-10 minute airport above the 3.06% cancellation line. That line is the top quarter of cancellation rates among origins with at least 1,000 flights. Fort Myers is the next large airport on that cancellation list.
 
-Do not start with the March–April 2020 security codes, with airports under 250 flights, or with a network-wide claim that a single change will cut the 76.4% carrier-plus-late-aircraft share. That share is a reporting association on flights that were already late. It is not a claim that those minutes were avoidable.
+Do not start with the 2020 security-coded cancellations, including the six in July, with airports under 250 flights, or with a network-wide claim that a single change will cut the 76.4% carrier-plus-late-aircraft share. That share is a reporting association on flights that were already late. It is not a claim that those minutes were avoidable.
 
 ## What the workbook adds
 

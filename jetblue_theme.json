@@ -1,0 +1,17 @@
+
+{
+    "name": "JetBlue Operations",
+    "dataColors": [
+      "#003876",
+      "#0078D2",
+      "#3E8FD0",
+      "#3EC6D6",
+      "#00204A",
+      "#6B8EAD",
+      "#8DAFCB",
+      "#A7B5C5"
+    ],
+    "background": "#FFFFFF",
+    "foreground": "#00204A",
+    "tableAccent": "#003876"
+  }

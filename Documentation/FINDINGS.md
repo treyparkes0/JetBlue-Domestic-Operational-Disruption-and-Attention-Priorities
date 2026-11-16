@@ -107,6 +107,8 @@ The same measures were rerun on 8 November 2026 with 2020 left out. The full-win
 
 Sunday still has the highest late-arrival rate, the highest cancellation rate (2.79%), and the most minutes. Friday is next on the late-arrival rate, at 29.6%. July still has the highest late-arrival rate and the most minutes. August and December both round to 32.0% late. August has 4,284,267 minutes and December has 3,942,031. With 2020 removed, January has the highest calendar-month cancellation rate, at 4.22%. August–December in that cut still do not include 2026.
 
+With 2020 and 2026 both removed, so every calendar month covers the same years, July is still first, at 34.5% late and 4,941,707 minutes.
+
 ## Cancellation codes
 
 `cancellation_reason` covers cancelled flights only. All 50,674 have a code. The test matched A 14,477, B 18,287, C 11,154, and D 6,756. There is no Unknown row. This split is not the delay-minute split.
@@ -118,7 +120,7 @@ Sunday still has the highest late-arrival rate, the highest cancellation rate (2
 | C | National Air System | 11,154 | 22.0% |
 | D | Security | 6,756 | 13.3% |
 
-Security is not a standing pattern. 6,755 of the 6,756 security codes are in 2020, and 6,749 of those are March and April 2020, across large origins rather than one station. One security-coded cancellation is in May 2023. Outside 2020, weather is 42.5% of cancellations, carrier 31.5%, NAS 25.9%, and security is that one flight.
+Security is not a standing pattern. 6,755 of the 6,756 security codes are in 2020, and 6,749 of those are March and April 2020, across large origins rather than one station. Six of the 2020 security-coded cancellations are in July, not March–April. One security-coded cancellation is in May 2023. Outside 2020, weather is 42.5% of cancellations, carrier 31.5%, NAS 25.9%, and security is that one flight.
 
 January is the weather month (4,672 weather cancellations). July is the NAS month (3,456). In January–July 2026, weather is 2,888 of 5,668 cancellations (50.9%). That partial year is not annualized.
 
@@ -176,12 +178,12 @@ JFK, Boston, San Juan, DCA, West Palm Beach, and LAX are in the minute top 10 an
 
 These are places to look. They are not a claim that a particular change will cut delay.
 
-1. JFK and Boston departure banks, turns, and late-aircraft patterns. Together they hold 12.8 million arrival-delay minutes. Boston’s rate is better than JFK’s. The network cause mix says late aircraft and carrier are the large buckets on flights that are already late.
-2. Fort Lauderdale and Orlando, and the Florida–New York routes, especially July, then August and December. July has the highest late-arrival rate and the most minutes. With 2020 removed, August and December both round to 32.0% late, and August has more minutes. Those origins are in both the minute ranking and the late-arrival quartile. MCO → EWR and FLL → EWR are the high-rate routes with a real base.
-3. Sunday, and then Friday. Sunday combines the worst rate with the most minutes. Friday is the busiest day and is close behind on rate.
-4. Miami as a station reliability review: 34.3% late on 13,280 departures, without being a top-10 minute airport.
-5. LaGuardia’s cancellation rate (3.32%) beside its minute rank, separate from the late-arrival question.
-6. Leave March–April 2020 security-coded cancellations out of a current security review. Leave airports and routes under 250 flights out of the first pass.
+1. Review JFK and Boston first. Together they hold 12.8 million arrival-delay minutes, 29% of the 44.2 million. JFK has 317,477 flights and a 27.8% late-arrival rate. Boston has 350,117 flights and a 25.4% late-arrival rate. Boston flies more and is late less often. JFK still has more minutes. These are arrival-delay minutes on flights that departed the origin. Ask whether turns and late aircraft explain the gap. The file does not show that cause. On late flights, the recorded mix is 39.2% late aircraft and 37.2% carrier. That mix does not prove those minutes were avoidable.
+2. Review MCO → JFK, MCO → EWR, and FLL → EWR in July, then August. MCO → JFK is 22,110 flights, 31.8% late, and 612,862 minutes. MCO → EWR is 14,407 flights, 35.9% late, and 434,041 minutes. FLL → EWR is 10,993 flights, 35.8% late, and 299,164 minutes. July is first for the network and for these three routes together. August is second. Leave December off this list. June has more of these routes’ minutes than December does. For FLL → EWR, also look at April. April has more of that route’s minutes than July. July has the higher late-arrival rate. Fort Lauderdale and Orlando are in both the minute ranking and the late-arrival quartile.
+3. Review Sunday, then Friday. Sunday has 312,745 flights, a 29.5% late-arrival rate, and 7.37 million minutes. Friday is the busiest day, with 314,540 flights, a 28.6% late-arrival rate, and 6.95 million minutes.
+4. Review Miami for late arrivals. 34.3% of Miami flights arrive late, on 13,280 flights. Miami is 22nd by total minutes, so this is a reliability review, not a minute review.
+5. Review LaGuardia for cancellations. 2,168 of 65,340 flights were cancelled, 3.32%. LaGuardia is 7th by total minutes and the only top-10 minute airport above the 3.06% cancellation line. That line is the 75th percentile of cancellation rates among origins with at least 1,000 flights. Fort Myers is the next large airport on that cancellation list.
+6. Leave the 2020 security-coded cancellations out of a current security review, including the six in July. Leave airports and routes under 250 flights out of the first pass.
 
 ## Limitations
 
