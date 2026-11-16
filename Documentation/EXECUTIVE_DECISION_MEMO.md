@@ -32,7 +32,7 @@ DCA, LAX, and the JFK–LAX routes show the other side. They are busy, and their
 
 ## Where reliability is elevated
 
-Among origins with at least 1,000 flights, the top quartile starts at 29.6% late and 3.06% cancelled. Those are separate flags. A high cancellation rate is not ranked above a high minute total.
+Among origins with at least 1,000 flights, the top quartile starts at 29.59% late and 3.06% cancelled. Those are separate flags. A high cancellation rate is not ranked above a high minute total. Newark’s late-arrival rate is 29.6%, so it clears that cutoff.
 
 Fort Lauderdale, Orlando, and Newark clear the late-arrival quartile and are also in the top 10 by minutes. Miami clears it without being in that top 10: 13,280 departures, 34.3% late, about 30 minutes of floored delay per operated flight. Denver is the same kind of item at 11,117 flights and 33.0% late.
 
@@ -44,7 +44,7 @@ Six origins between 250 and 999 flights have late-arrival rates in the same rang
 
 **Day of week.** Sunday is the worst day in this file: 29.5% late, 2.88% cancelled, and 7.37 million minutes. With 2020 removed, Sunday still leads, at 30.8% late, 2.79% cancelled, and 7.18 million minutes. Friday is the busiest day, at 314,540 flights and 28.6% late. Wednesday is the most reliable, at 23.5% late, and it is not the lightest day. Saturday is the lightest. A schedule review that assumes the busiest day is the problem, or that the quietest day is the recovery day, does not match these counts.
 
-**Season.** July is the heaviest month on both the late-arrival rate (33.6%) and the minutes. With 2020 removed, July still leads, at 34.9% late and 5.67 million minutes. October is the lightest late-arrival month (21.1%). March’s cancellation rate is high because 2020 is in the pool. With 2020 removed, January is the cancellation month, at 4.22%. July 2023 and July 2026 were severe individual months. April 2020 was a cancellation month, at 35.8%, on a shrunken schedule.
+**Season.** July is the heaviest month on both the late-arrival rate (33.6%) and the minutes. With 2020 removed, July still leads, at 34.9% late and 5.67 million minutes, and August is next on the rate, at 32.0%. October is the lightest late-arrival month (21.1%). March’s cancellation rate is high because 2020 is in the pool. With 2020 removed, January is the cancellation month, at 4.22%. July 2023 and July 2026 were severe individual months. April 2020 was a cancellation month, at 35.8%, on a shrunken schedule.
 
 **Causes.** On late arrivals, late aircraft is 39.2% of cause minutes and carrier is 37.2%. NAS is 20.7%. The weather bucket is 2.7%, and that bucket is extreme weather only, not every weather minute inside NAS. Security delay minutes are 0.2%.
 
@@ -53,7 +53,7 @@ Six origins between 250 and 999 flights have late-arrival rates in the same rang
 ## What to investigate first
 
 1. **JFK and Boston turns and late-aircraft flow.** These two origins hold 12.8 million arrival-delay minutes. The cause mix on late flights points at late aircraft and carrier before it points at the extreme-weather bucket. Boston’s better rate is part of the question, not a reason to skip Boston.
-2. **Fort Lauderdale, Orlando, and the Florida–New York routes, in July–August and December.** This is where rate and minutes coincide. Include MCO → EWR and FLL → EWR in that review.
+2. **Fort Lauderdale, Orlando, and the Florida–New York routes, in July and August.** This is where rate and minutes coincide. July is the heaviest month. With 2020 removed, August is next on the late-arrival rate. Include MCO → EWR and FLL → EWR in that review.
 3. **Sunday operation, then Friday.** Sunday combines the worst rate with the most minutes. Friday is the volume day just behind it.
 4. **Miami as a station review.** The rate is high on a base large enough to trust, and the minute total is not large enough to put it ahead of the five origins above.
 5. **LaGuardia cancellations, kept separate from late arrivals.**
@@ -62,7 +62,7 @@ Do not start with the March–April 2020 security codes, with airports under 250
 
 ## What the workbook adds
 
-`Jetblue_sensitivity_analysis.xlsx` compares ways to draw the attention list. It uses the origin ranking already in this memo. The plan, the first five origins by minutes, covers 22,045,754 minutes (49.9% of the network), 1,065,139 flights (50.5%), and 24,551 cancellations (48.4%). The five highest late-arrival rates cover 75,342 minutes (0.17%) on 2,340 flights, at a 35.8% late-arrival rate. Newark is the next airport by minutes. LaGuardia is the cancellation airport that list leaves off. Extending the minutes list to ten origins reaches 65.4% of minutes.
+`Jetblue_sensitivity_analysis.xlsx` compares ways to draw the attention list. It uses the origin ranking already in this memo. The plan, the first five origins by minutes, covers 22,045,754 minutes (49.9% of the network), 1,065,139 flights (50.5%), and 24,551 cancellations (48.4%). The five highest late-arrival rates cover 75,342 minutes (0.17%) on 2,340 flights, at a 35.8% late-arrival rate. That list has no flight minimum. Traverse City (74 flights) and Boise (39) are under 250 flights. Asheville (303) and Wilmington, NC (273) are in the 250–999 monitoring band. Newburgh (1,651) is the only origin on that list with at least 1,000 flights. Newark is the next airport by minutes. LaGuardia is the cancellation airport that list leaves off. Extending the minutes list to ten origins reaches 65.4% of minutes. The “minutes plus cancellation” option keeps those first five and adds one airport, so the covered list has six origins. The workbook cutoff for that option stays at five so the added airport is not counted twice.
 
 Use the workbook to see what a different list would cover. It is not a saving, and it is not evidence that a program will deliver a cut.
 

@@ -23,7 +23,7 @@ logs/
 .user.yml
 
 # Official BTS downloads stay on this machine.
-# data/jetblue_bts_coverage.csv stays tracked.
+# Documentation/jetblue_bts_coverage.csv stays tracked.
 data/raw/
 *.zip
 

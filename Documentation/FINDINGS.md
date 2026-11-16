@@ -150,7 +150,7 @@ The plan is the first five origins by minutes: JFK, Boston, Fort Lauderdale, Orl
 | First five by minutes | 22,045,754 | 49.9% | 1,065,139 | 50.5% | 24,551 | 27.7% |
 | Five highest late-arrival rates | 75,342 | 0.17% | 2,340 | 0.11% | 70 | 35.8% |
 
-The rate list is Traverse City, Boise, Asheville, Wilmington (NC), and Newburgh. That list has no volume floor. Traverse City and Boise are under 250 flights, so `origin_priority` leaves them off the monitoring list. The rate is higher and the base is small. Newark is the largest minute airport left off the first five. LaGuardia is the cancellation airport left off the first five. Extending the minutes list to ten origins brings the share to 65.4%.
+The rate list is Traverse City (74 flights), Boise (39), Asheville (303), Wilmington, NC (273), and Newburgh (1,651). That list has no volume floor. Traverse City and Boise are under 250 flights, so `origin_priority` leaves them off the monitoring list. Asheville and Wilmington sit in the 250–999 monitoring band. Newburgh is the only origin on the list with at least 1,000 flights. The rate is higher, and four of the five bases are small. The five together are still 0.17% of arrival-delay minutes. Newark is the largest minute airport left off the first five. LaGuardia is the cancellation airport left off the first five. Extending the minutes list to ten origins brings the share to 65.4%. The option that adds the largest cancellation airport left off the first five covers six origins. Its formula cutoff stays at five so that airport is not counted twice.
 
 The workbook also offers the first ten by minutes, the five origins with the most cancellations, and the first five by minutes plus the largest cancellation airport left off. Each option reports the share of minutes, flights, and cancellations that list covers. These are coverage counts. They are not a measured saving, and they do not say a management action will produce a cut.
 
@@ -177,7 +177,7 @@ JFK, Boston, San Juan, DCA, West Palm Beach, and LAX are in the minute top 10 an
 These are places to look. They are not a claim that a particular change will cut delay.
 
 1. JFK and Boston departure banks, turns, and late-aircraft patterns. Together they hold 12.8 million arrival-delay minutes. Boston’s rate is better than JFK’s. The network cause mix says late aircraft and carrier are the large buckets on flights that are already late.
-2. Fort Lauderdale and Orlando, and the Florida–New York routes, especially July–August and December. Those origins are in both the minute ranking and the late-arrival quartile. MCO → EWR and FLL → EWR are the high-rate routes with a real base.
+2. Fort Lauderdale and Orlando, and the Florida–New York routes, especially July and August. July has the highest late-arrival rate and the most minutes. With 2020 removed, August is next on the rate, at 32.0%. Those origins are in both the minute ranking and the late-arrival quartile. MCO → EWR and FLL → EWR are the high-rate routes with a real base.
 3. Sunday, and then Friday. Sunday combines the worst rate with the most minutes. Friday is the busiest day and is close behind on rate.
 4. Miami as a station reliability review: 34.3% late on 13,280 departures, without being a top-10 minute airport.
 5. LaGuardia’s cancellation rate (3.32%) beside its minute rank, separate from the late-arrival question.

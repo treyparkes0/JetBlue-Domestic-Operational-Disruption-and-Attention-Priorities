@@ -1,8 +1,9 @@
 import pandas as pd
 from pathlib import Path
 
-file_path = Path(r"C:\Users\treyp\JetBlue-Operations-Analytics\data\raw\jetblue_b6.csv")
-clean_path = Path(r"C:\Users\treyp\JetBlue-Operations-Analytics\data\raw\jetblue_b6_clean.csv")
+raw_folder = Path(__file__).resolve().parent.parent / "data" / "raw"
+file_path = raw_folder / "jetblue_b6.csv"
+clean_path = raw_folder / "jetblue_b6_clean.csv"
 
 df = pd.read_csv(file_path, low_memory=False)
 print("Loaded:", df.shape)
@@ -46,12 +47,15 @@ df["FlightDate"] = pd.to_datetime(df["FlightDate"], errors="coerce")
 
 print("\n--- DATA QUALITY ---")
 
+checks_passed = True
+
 row_count = len(df)
 print("Rows:", row_count)
 if row_count == 2110783:
     print("PASS row count matches the audit")
 else:
     print("FAIL row count. Expected 2110783")
+    checks_passed = False
 
 carriers = df["Reporting_Airline"].dropna().unique()
 print("Carriers:", sorted(carriers))
@@ -59,6 +63,7 @@ if list(carriers) == ["B6"]:
     print("PASS only JetBlue")
 else:
     print("FAIL a carrier other than B6 is in the file")
+    checks_passed = False
 
 print("Earliest flight:", df["FlightDate"].min())
 print("Latest flight:", df["FlightDate"].max())
@@ -68,6 +73,7 @@ if missing_dates == 0 and str(df["FlightDate"].min().date()) == "2018-01-01" and
     print("PASS dates run from 2018-01-01 through 2026-07-31")
 else:
     print("FAIL date range")
+    checks_passed = False
 
 flight_key = [
     "FlightDate",
@@ -82,6 +88,7 @@ if duplicate_keys == 0:
     print("PASS no duplicate flight keys")
 else:
     print("FAIL duplicate flight keys")
+    checks_passed = False
 
 print("\nMissing values in kept columns:")
 print(df.isnull().sum().sort_values(ascending=False).head(15))
@@ -101,6 +108,7 @@ if bad_clocks == 0:
     print("PASS clock minutes are between 0 and 1439, or missing")
 else:
     print("FAIL a clock time is outside a normal day")
+    checks_passed = False
 
 cancelled_count = (df["Cancelled"] == 1).sum()
 diverted_count = ((df["Diverted"] == 1) & (df["Cancelled"] == 0)).sum()
@@ -110,6 +118,10 @@ if cancelled_count == 50674 and diverted_count == 7288:
     print("PASS cancelled and diverted counts match the audit")
 else:
     print("FAIL cancelled or diverted count")
+    checks_passed = False
+
+if not checks_passed:
+    raise SystemExit("Audit checks failed. The cleaned file was not written.")
 
 df.to_csv(clean_path, index=False)
 print("\nSaved cleaned file to", clean_path)

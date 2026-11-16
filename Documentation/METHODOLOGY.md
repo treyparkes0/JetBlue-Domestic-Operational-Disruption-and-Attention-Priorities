@@ -1,6 +1,6 @@
 # Methodology
 
-Rules for how the project measures JetBlue domestic disruption. Facts about the file come from `DATA_AUDIT.md` (reviewed 8 October 2026). The exploratory rankings are in `FINDINGS.md` (run 25 October 2026). Scope decisions are marked as decisions. This file does not choose risk-score weights.
+Rules for how the project measures JetBlue domestic disruption. Facts about the file come from `DATA_AUDIT.md` (reviewed 8 October 2026). The exploratory rankings are in `FINDINGS.md` (reconciled 2 November 2026; workbook and dashboard checked 8 November 2026). Scope decisions are marked as decisions. This file does not choose risk-score weights.
 
 Nothing here is a causal estimate. An association between a schedule attribute and an outcome is not a claim that changing the attribute will change the outcome.
 
@@ -124,9 +124,9 @@ Cancelled flights are classified with `CancellationCode` (`A` carrier, `B` weath
 | Weekday and cancellation mix | Done | `weekday_performance` and `cancellation_reason`. Cancellation codes stay separate from delay minutes. |
 | Risk scores | Not used | No weights. The priority framework above is the ranking method. |
 | Strategic priority list | Done | `origin_priority` and `route_priority`. First attention remains JFK, Boston, Fort Lauderdale, Orlando, and San Juan. The origin rollup of `dbt_dev.airport_month` matched those minute totals on 2 November 2026. |
-| Excel attention lists | Done | `Jetblue_sensitivity_analysis.xlsx`. `Raw Data` is the origin extract. `Airports` ranks origins by minutes and by late-arrival rate. `Scenario` compares five list rules. The plan is the first five origins by minutes. `Scorecard` sets that list beside the five highest late-arrival rates. No dollar figure and no forecast. 2020 and January–July 2026 stay labeled. |
+| Excel attention lists | Done | `Jetblue_sensitivity_analysis.xlsx`. `Raw Data` is the origin extract. `Airports` ranks origins by minutes and by late-arrival rate. `Scenario` compares five list rules. The plan is the first five origins by minutes. `Scorecard` sets that list beside the five highest late-arrival rates and states the volume floors. The rate list has no flight minimum. The minutes-plus-cancellation option covers six origins; its formula cutoff stays at five. No dollar figure and no forecast. 2020 and January–July 2026 stay labeled on Scenario and Scorecard. |
 | Power BI star | Done | `fact_flight`, `dim_month`, `dim_weekday`, `dim_origin`, and `dim_route` in `jetblue_capstone.powerbi_star`. Counts stay on the fact. Flags stay on the origin and route dimensions. |
-| Power BI dashboard | Done | `Jetblue_Final_analysis.pbix`. Pages: Overview, Three Events, Minutes, Rate and Size, Patterns, Attention. Rates are measures on `Fact_Flight`. `origin_priority` is used on Overview and Attention. The workbook comparison is not rebuilt in the report. |
+| Power BI dashboard | Done | `Jetblue_Final_analysis.pbix`. Pages: Overview, Three Events, Minutes, Rate and Size, Patterns, Attention. Rates are measures on `Fact_Flight`. `origin_priority` is used on Overview and Attention. Patterns cause cards sum carrier, security, weather, and NAS minutes on the flight fact. Late-aircraft minutes stay in `delay_causes` and in `FINDINGS.md`. The workbook comparison is not rebuilt in the report. Title edits belong in Power BI Desktop. Rewriting the `.pbix` package outside Desktop breaks its signature. |
 | Recommendations | Written | `FINDINGS.md` and `EXECUTIVE_DECISION_MEMO.md`. Claims stay inside `BUSINESS_PROBLEM.md`. |
 
 Left off the core path: Census attributes, T-100, Monte Carlo simulation, an independent weather feed, a peer airline, a machine-learning model, and any severe-disruption minute cutoff.
