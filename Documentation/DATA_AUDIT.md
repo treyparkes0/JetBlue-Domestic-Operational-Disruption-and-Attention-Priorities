@@ -277,7 +277,7 @@ What was read instead:
 1. One zip per month from `https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_{YEAR}_{MONTH}.zip`, for 2018_1 through 2026_7.
 2. Each zip contains one CSV of all reporting carriers and a `readme.html`. The CSV header uses the official field names.
 3. Rows were kept when `Reporting_Airline` was `B6`. The other carriers were counted and discarded.
-4. The zips were not committed. They were removed after the counts were taken. This repository does not contain a data directory.
+4. The zips were not committed. They stay in local `data/raw/`, which is gitignored. This repository does not commit a data directory.
 
 57,090,030 all-carrier rows were scanned to produce the 2,110,783 JetBlue rows.
 

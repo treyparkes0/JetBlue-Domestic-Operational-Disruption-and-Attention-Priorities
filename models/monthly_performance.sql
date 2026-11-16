@@ -14,6 +14,7 @@ select
   sum(case when Cancelled = 1 then 1 else 0 end) / count(*) as Cancellation_Rate,
   sum(case when Diverted = 1 and Cancelled = 0 then 1 else 0 end) / count(*) as Diversion_Rate,
   sum(case when Cancelled = 0 and Diverted = 0 then Arrival_Delay_Minutes end) as Arrival_Delay_Minutes,
+  -- Carrier plus late aircraft on late arrivals. A reporting bucket, not a claim the minutes were avoidable.
   sum(case when Arrival_Delay_15_or_More = 1 then Carrier_Delay + Late_Aircraft_Delay end) as Controllable_Delay_Minutes,
   sum(case when Arrival_Delay_15_or_More = 1 then Weather_Delay end) as Weather_Delay_Minutes,
   sum(case when Arrival_Delay_15_or_More = 1 then National_Air_System_Delay end) as NAS_Delay_Minutes,

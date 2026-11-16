@@ -44,7 +44,7 @@ Six origins between 250 and 999 flights have late-arrival rates in the same rang
 
 **Day of week.** Sunday is the worst day in this file: 29.5% late, 2.88% cancelled, and 7.37 million minutes. With 2020 removed, Sunday still leads, at 30.8% late, 2.79% cancelled, and 7.18 million minutes. Friday is the busiest day, at 314,540 flights and 28.6% late. Wednesday is the most reliable, at 23.5% late, and it is not the lightest day. Saturday is the lightest. A schedule review that assumes the busiest day is the problem, or that the quietest day is the recovery day, does not match these counts.
 
-**Season.** July is the heaviest month on both the late-arrival rate (33.6%) and the minutes. With 2020 removed, July still leads, at 34.9% late and 5.67 million minutes, and August is next on the rate, at 32.0%. October is the lightest late-arrival month (21.1%). March’s cancellation rate is high because 2020 is in the pool. With 2020 removed, January is the cancellation month, at 4.22%. July 2023 and July 2026 were severe individual months. April 2020 was a cancellation month, at 35.8%, on a shrunken schedule.
+**Season.** July is the heaviest month on both the late-arrival rate (33.6%) and the minutes. With 2020 removed, July still leads, at 34.9% late and 5.67 million minutes. August and December both round to 32.0% late. August has 4,284,267 minutes and December has 3,942,031. October is the lightest late-arrival month (21.1%). March’s cancellation rate is high because 2020 is in the pool. With 2020 removed, January is the cancellation month, at 4.22%. July 2023 and July 2026 were severe individual months. April 2020 was a cancellation month, at 35.8%, on a shrunken schedule.
 
 **Causes.** On late arrivals, late aircraft is 39.2% of cause minutes and carrier is 37.2%. NAS is 20.7%. The weather bucket is 2.7%, and that bucket is extreme weather only, not every weather minute inside NAS. Security delay minutes are 0.2%.
 
@@ -53,12 +53,12 @@ Six origins between 250 and 999 flights have late-arrival rates in the same rang
 ## What to investigate first
 
 1. **JFK and Boston turns and late-aircraft flow.** These two origins hold 12.8 million arrival-delay minutes. The cause mix on late flights points at late aircraft and carrier before it points at the extreme-weather bucket. Boston’s better rate is part of the question, not a reason to skip Boston.
-2. **Fort Lauderdale, Orlando, and the Florida–New York routes, in July and August.** This is where rate and minutes coincide. July is the heaviest month. With 2020 removed, August is next on the late-arrival rate. Include MCO → EWR and FLL → EWR in that review.
+2. **Fort Lauderdale, Orlando, and the Florida–New York routes, in July, then August and December.** This is where rate and minutes coincide. July is the heaviest month. With 2020 removed, August and December both round to 32.0% late, and August has more minutes. Include MCO → EWR and FLL → EWR in that review.
 3. **Sunday operation, then Friday.** Sunday combines the worst rate with the most minutes. Friday is the volume day just behind it.
 4. **Miami as a station review.** The rate is high on a base large enough to trust, and the minute total is not large enough to put it ahead of the five origins above.
 5. **LaGuardia cancellations, kept separate from late arrivals.**
 
-Do not start with the March–April 2020 security codes, with airports under 250 flights, or with a network-wide claim that a single change will cut the 76.4% controllable share.
+Do not start with the March–April 2020 security codes, with airports under 250 flights, or with a network-wide claim that a single change will cut the 76.4% carrier-plus-late-aircraft share. That share is a reporting association on flights that were already late. It is not a claim that those minutes were avoidable.
 
 ## What the workbook adds
 

@@ -26,7 +26,7 @@ On flights that were already late, carrier delay plus late-aircraft delay is 76.
 - Largest directed route by minutes: MCO → JFK, 612,862 minutes, 31.8% late. Boston–Washington carries a similar load at a rate in the low 20s.
 - High rate with a real route base: MCO → EWR 35.9% on 14,407 flights, FLL → EWR 35.8% on 10,993 flights.
 - Sunday: 29.5% late, 2.88% cancelled, 7.37 million minutes. Friday is the busiest day (314,540 flights, 28.6% late). Wednesday is the most reliable day (23.5% late). Both Sunday and July still lead with 2020 removed.
-- July is the heaviest month (33.6% late, 5,754,997 minutes). With 2020 removed, July is 34.9% late and August is next on the rate, at 32.0%. October is the lightest late-arrival month (21.1%).
+- July is the heaviest month (33.6% late, 5,754,997 minutes). With 2020 removed, July is 34.9% late. August and December both round to 32.0% late, and August has more minutes (4,284,267 versus 3,942,031). October is the lightest late-arrival month (21.1%).
 - Cancellation codes: weather 36.1%, carrier 28.6%, NAS 22.0%, security 13.3%. Almost all security-coded cancellations are March–April 2020.
 - Cause minutes on late arrivals: late aircraft 39.2%, carrier 37.2%, NAS 20.7%, weather 2.7%, security 0.2%. Weather here is the extreme-weather bucket, not every weather minute inside NAS.
 - The late-arrival-rate list of five is Traverse City (74 flights), Boise (39), Asheville (303), Wilmington, NC (273), and Newburgh (1,651). Only Newburgh has at least 1,000 flights. The list still covers 0.17% of minutes.
@@ -36,7 +36,7 @@ On flights that were already late, carrier delay plus late-aircraft delay is 76.
 These are places to investigate. They are not a claim that one change will cut delay, and they are not a dollar saving.
 
 1. JFK and Boston turns and late-aircraft flow. Together they hold 12.8 million arrival-delay minutes. Boston’s better rate is part of the question.
-2. Fort Lauderdale, Orlando, and the Florida–New York routes, in July and August. Include MCO → EWR and FLL → EWR. July is the heaviest month. With 2020 removed, August is next on the late-arrival rate.
+2. Fort Lauderdale, Orlando, and the Florida–New York routes, in July, then August and December. Include MCO → EWR and FLL → EWR. July is the heaviest month. With 2020 removed, August and December both round to 32.0% late, and August has more minutes.
 3. Sunday operation, then Friday. Sunday combines the worst rate with the most minutes. Friday is the volume day just behind it.
 4. Miami as a station review: 34.3% late on 13,280 departures, outside the top 10 by minutes.
 5. LaGuardia cancellations (3.32%), kept separate from late arrivals.
@@ -49,7 +49,7 @@ Leave March–April 2020 security-coded cancellations, and airports under 250 fl
 
 Screenshot files are not in this repository. Open the report in Power BI Desktop and export the six pages if you want images in the portfolio. Edit titles in Desktop. The `.pbix` is a signed package, so unzipping it and rewriting the report files makes Desktop reject the file.
 
-The page list below is the report that opens. Patterns shows carrier, security, weather, and NAS cause minutes. Late aircraft, 39.2% of cause minutes, is in the findings and is not one of those four cards.
+The page list below is the report that opens. Patterns shows carrier, late-aircraft, security, weather, and NAS cause minutes. Late aircraft is 39.2% of cause minutes.
 
 | Page | What it shows |
 | --- | --- |
@@ -57,14 +57,14 @@ The page list below is the report that opens. Patterns shows carrier, security, 
 | Three Events | Late arrivals, cancellations, and diversions kept as separate counts. |
 | Minutes | Arrival-delay minutes by origin and by directed route. A year slicer sits on this page. |
 | Rate and Size | Late-arrival rate beside flight volume for origins with at least 1,000 flights, plus elevated cancellations. A year slicer sits on this page. |
-| Patterns | Weekday flights and minutes, calendar month, and carrier, security, weather, and NAS cause minutes. An origin slicer sits on this page. |
+| Patterns | Weekday flights and minutes, calendar month, and carrier, late-aircraft, security, weather, and NAS cause minutes. An origin slicer sits on this page. January–July include 2026. August–December do not. |
 | Attention | High-accumulated-impact origins, monitoring origins, and elevated late-arrival routes. |
 
 ## Methodology
 
 Definitions and the priority rules are in `Documentation/METHODOLOGY.md`. The reconciled counts are in `Documentation/FINDINGS.md`.
 
-Operated flights are the late-arrival denominator. All scheduled flights are the cancellation denominator. Blank delay fields stay blank. Controllable minutes are `CarrierDelay` plus `LateAircraftDelay`, and only on late arrivals.
+Operated flights are the late-arrival denominator. All scheduled flights are the cancellation denominator. Blank delay fields stay blank. Carrier minutes plus late-aircraft minutes are summed only on late arrivals. That sum is a reporting bucket. It is not a claim that the minutes were avoidable.
 
 Origins need at least 1,000 flights to enter the main ranking. Directed routes need at least 500. JFK → FLL and FLL → JFK are different routes. Origin and destination roles stay separate. Monitoring is 250–999 flights for origins and 250–499 for routes, with a late-arrival rate at or above the same 75th percentile. On the 2 November 2026 build the origin cutoffs were 29.59% late and 3.06% cancelled. The route cutoffs were 30.95% late and 2.83% cancelled.
 
@@ -120,17 +120,18 @@ The file has no passengers, fares, crew, maintenance, or independent weather. Th
 
 1. Put the official monthly zips in `data/raw/`.
 2. From this folder, run `python src/filter_jetblue.py`, then `python src/jetblue_eda.py`. Both scripts resolve `data/raw` from the repository folder. `jetblue_eda.py` writes `data/raw/jetblue_b6_clean.csv` only after the row, carrier, date, duplicate, clock, cancellation, and diversion checks pass.
-3. Load the flight-level table behind `jetblue_capstone.views.flight_performance`. That load is already done in this workspace and is not built by dbt. The models expect these columns on that view: `Flight_Year`, `Flight_Month`, `Flight_Date`, `Day_of_Week`, `Origin_Airport_ID`, `Origin_Airport`, `Origin_City`, `Origin_State`, `Destination_Airport_ID`, `Destination_Airport`, `Destination_City`, `Destination_State`, `Cancelled`, `Diverted`, `Arrival_Delay_15_or_More`, `Arrival_Delay_Minutes`, `Carrier_Delay`, `Late_Aircraft_Delay`, `Weather_Delay`, `National_Air_System_Delay`, `Security_Delay`, and `CancellationCode`.
+3. Load `data/raw/jetblue_b6_clean.csv` into Databricks, then create `jetblue_capstone.views.flight_performance` from `sql/flight_performance.sql`. That load is already done in this workspace and is not built by dbt. The SQL file is the column mapping. Do not run it until its source table name matches the table you loaded. The models read these columns: `Flight_Year`, `Flight_Month`, `Flight_Date`, `Day_of_Week`, `Origin_Airport_ID`, `Origin_Airport`, `Origin_City`, `Origin_State`, `Destination_Airport_ID`, `Destination_Airport`, `Destination_City`, `Destination_State`, `Cancelled`, `Diverted`, `Arrival_Delay_15_or_More`, `Arrival_Delay_Minutes`, `Carrier_Delay`, `Late_Aircraft_Delay`, `Weather_Delay`, `National_Air_System_Delay`, `Security_Delay`, and `CancellationCode`.
 4. Use a dbt profile named `jetblue` whose target schema is `dbt_dev`. `dbt_project.yml` sends the dashboard models to the `powerbi_star` schema. From this folder, run `dbt build`.
 5. `Raw Data` in the workbook is the origin extract. `Airports`, `Scenario`, and `Scorecard` read that sheet. The `Airports` and `Scenario` tabs have a trailing space in the sheet name. The formulas use that name. `Scorecard` compares the minutes list with the highest late-arrival rates and states the volume floors.
 
-`dbt build` on 8 November 2026 passed 13 views and 37 tests: the 8 analytical views in `dbt_dev` and the 5 dashboard views in `powerbi_star`. July 2023, the origin ranking, and MCO → JFK still match `FINDINGS.md`.
+`dbt build` on 16 November 2026 passed 13 views and 40 tests: the 8 analytical views in `dbt_dev` and the 5 dashboard views in `powerbi_star`. July 2023, the origin ranking, and MCO → JFK still match `FINDINGS.md`. The 40 tests include the network totals, the five cause-minute totals, and the percentile cutoffs.
 
 ## Repository structure
 
 ```text
 src/filter_jetblue.py          Keep B6 from the monthly zips
 src/jetblue_eda.py             Quality checks and the exploratory tables
+sql/flight_performance.sql     Column mapping into the flight-level view
 models/                        dbt analytical views and the Power BI star
 tests/                         dbt tests, including the locked counts
 Jetblue_sensitivity_analysis.xlsx          Attention-list comparison

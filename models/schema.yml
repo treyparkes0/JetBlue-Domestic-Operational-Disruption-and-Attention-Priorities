@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: monthly_performance
-    description: One row per year and month. Late-arrival rate uses operated flights. Cancellation rate uses every flight. Do not average the stored rate columns.
+    description: One row per year and month. Late-arrival rate uses operated flights. Cancellation rate uses every flight. Do not average the stored rate columns. Controllable_Delay_Minutes is carrier plus late aircraft on late arrivals. It is a reporting bucket, not a claim those minutes were avoidable.
     columns:
       - name: Year_Month_Key
         description: Flight_Year * 100 + Flight_Month. One value per row. Month slicer key for airport_month, route_month, cancellation_reason, and delay_causes.

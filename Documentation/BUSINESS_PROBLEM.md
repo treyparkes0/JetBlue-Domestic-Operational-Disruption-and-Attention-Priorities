@@ -10,11 +10,11 @@ The carrier in scope is JetBlue Airways, `Reporting_Airline` = `B6`. The public 
 
 ## Why it matters operationally
 
-The Department of Transportation on-time rule in this table is arrival less than 15 minutes after the published arrival time. In the flight file that rule is `ArrDel15`. A late arrival, a cancellation, and a diversion are different reported events. The audit counted them separately: 551,753 late arrivals, 50,674 cancellations (2.40 percent of 2,110,783 flights), and 7,288 diversions that were not cancelled (0.345 percent). Blending them into one rate would hide which event is driving a place.
+The Department of Transportation on-time rule in this table is arrival less than 15 minutes after the published arrival time. In the flight file that rule is `ArrDel15`. A late arrival, a cancellation, and a diversion are different reported events. The counts are in `FINDINGS.md`. Blending them into one rate would hide which event is driving a place.
 
-The file supports a domestic ranking of airports, directed routes, and calendar periods by those events and by the cause mix. Phase 1 called that use GO. `FINDINGS.md` is that ranking, reconciled to `dbt_dev` on 2 November 2026.
+The file supports a domestic ranking of airports, directed routes, and calendar periods by those events and by the cause mix. `FINDINGS.md` is that ranking.
 
-Attention is limited, so the ranking shows where delay minutes sit on busy places. A high delay rate on a thin route is not, by itself, the first place to look. Carrier delay and late-aircraft delay are the controllable buckets the priority list separates from weather and from National Air System (NAS) delay. Security delay stays its own bucket. Those buckets are broad. Carrier delay mixes maintenance, crew, baggage, and other items the carrier reports there. The file cannot separate those items. Weather delay is the extreme-weather category, not every weather minute that may sit inside NAS delay.
+Attention is limited, so the ranking shows where delay minutes sit on busy places. A high delay rate on a thin route is not, by itself, the first place to look. Carrier delay and late-aircraft delay are one reporting bucket, kept separate from weather and from National Air System (NAS) delay. Security delay stays its own bucket. Calling that bucket controllable does not mean the minutes were avoidable. The carrier bucket mixes maintenance, crew, baggage, and other items the carrier reports there. The file cannot separate those items. Weather delay is the extreme-weather category, not every weather minute that may sit inside NAS delay.
 
 The file is a carrier report to BTS. It is not JetBlue’s internal operations database.
 
@@ -28,9 +28,9 @@ It does not mean international exposure, dollar loss, or a safety incident. The 
 
 Priority is risk considered with volume: delay minutes on busy places, not the delay rate alone. A high rate on a thin place is not automatically high priority. High volume with high risk comes before high risk with low volume. Low-volume, high-risk places stay visible as watch items.
 
-No weights are set in this file. `FINDINGS.md` names the order: JFK, Boston, Fort Lauderdale, Orlando, and San Juan first, with Miami as the main reliability watch item. That order is arrival-delay minutes with a minimum flight count, plus the quartile flags in `METHODOLOGY.md`. It is not a weighted score. `dbt_dev.airport_month` reproduced the origin minute totals on 2 November 2026.
+No weights are set in this file. `FINDINGS.md` names the order. That order is arrival-delay minutes with a minimum flight count, plus the quartile flags in `METHODOLOGY.md`. It is not a weighted score.
 
-Controllable delay minutes are carrier minutes plus late-aircraft minutes. Weather minutes and NAS minutes stay separate. Security minutes stay separate. Cause-minute fields are populated only when BTS requires a cause. On this extract that is the late-arrival rows (`ArrDel15` = 1): 551,753 rows, all five cause fields populated, and the five minutes sum to `ArrDelayMinutes` on every one of those rows. A blank cause is not zero. Filling it with zero would treat an on-time flight as a recorded zero for each cause.
+Carrier-plus-late-aircraft minutes are the column `Controllable_Delay_Minutes`. The name is the reporting bucket. It is not a claim that those minutes were avoidable. Weather minutes and NAS minutes stay separate. Security minutes stay separate. Cause-minute fields are populated only when BTS requires a cause, which on this extract is the late-arrival rows. A blank cause is not zero. Filling it with zero would treat an on-time flight as a recorded zero for each cause. The row counts are in `FINDINGS.md`.
 
 ## What a recommendation is allowed to claim
 

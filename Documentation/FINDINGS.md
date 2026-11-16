@@ -16,7 +16,7 @@ Arrival-delay minutes are concentrated. Five origins — JFK, Boston, Fort Laude
 
 The rate does not follow the same order. Boston has more departures than JFK and a lower late-arrival rate (25.4% versus 27.8%). JFK still has more minutes. Fort Lauderdale and Orlando combine a rate near 30% with a large base, so they sit in both the minute ranking and the top quartile of late-arrival rate. Miami is the clearest reliability watch item with a real base: 13,280 flights and a 34.3% late-arrival rate, outside the top 10 by minutes.
 
-Sunday has the highest late-arrival rate (29.5%), the highest cancellation rate (2.88%), and the most minutes. Friday is the busiest day and is not the least reliable. Wednesday is the most reliable day. July is the heaviest calendar month. Both leads hold with 2020 removed: Sunday is 30.8% late and 7,175,925 minutes, and July is 34.9% late and 5,671,988 minutes. About 76.4% of recorded late-arrival cause minutes are carrier plus late aircraft.
+Sunday has the highest late-arrival rate (29.5%), the highest cancellation rate (2.88%), and the most minutes. Friday is the busiest day and is not the least reliable. Wednesday is the most reliable day. July is the heaviest calendar month. Both leads hold with 2020 removed: Sunday is 30.8% late and 7,175,925 minutes, and July is 34.9% late and 5,671,988 minutes. About 76.4% of recorded late-arrival cause minutes are carrier plus late aircraft. That is a reporting association. It is not a claim that those minutes were avoidable.
 
 The workbook compares attention lists. The first five origins by minutes cover 49.9% of arrival-delay minutes. The five highest late-arrival rates cover 0.17%. That comparison is in the workbook section below.
 
@@ -105,7 +105,7 @@ The same measures were rerun on 8 November 2026 with 2020 left out. The full-win
 | July late-arrival rate | 33.6% | 34.9% |
 | July arrival-delay minutes | 5,754,997 | 5,671,988 |
 
-Sunday still has the highest late-arrival rate, the highest cancellation rate (2.79%), and the most minutes. Friday is next on the late-arrival rate, at 29.6%. July still has the highest late-arrival rate and the most minutes. August is next on the rate, at 32.0%. With 2020 removed, January has the highest calendar-month cancellation rate, at 4.22%. August–December in that cut still do not include 2026.
+Sunday still has the highest late-arrival rate, the highest cancellation rate (2.79%), and the most minutes. Friday is next on the late-arrival rate, at 29.6%. July still has the highest late-arrival rate and the most minutes. August and December both round to 32.0% late. August has 4,284,267 minutes and December has 3,942,031. With 2020 removed, January has the highest calendar-month cancellation rate, at 4.22%. August–December in that cut still do not include 2026.
 
 ## Cancellation codes
 
@@ -177,7 +177,7 @@ JFK, Boston, San Juan, DCA, West Palm Beach, and LAX are in the minute top 10 an
 These are places to look. They are not a claim that a particular change will cut delay.
 
 1. JFK and Boston departure banks, turns, and late-aircraft patterns. Together they hold 12.8 million arrival-delay minutes. Boston’s rate is better than JFK’s. The network cause mix says late aircraft and carrier are the large buckets on flights that are already late.
-2. Fort Lauderdale and Orlando, and the Florida–New York routes, especially July and August. July has the highest late-arrival rate and the most minutes. With 2020 removed, August is next on the rate, at 32.0%. Those origins are in both the minute ranking and the late-arrival quartile. MCO → EWR and FLL → EWR are the high-rate routes with a real base.
+2. Fort Lauderdale and Orlando, and the Florida–New York routes, especially July, then August and December. July has the highest late-arrival rate and the most minutes. With 2020 removed, August and December both round to 32.0% late, and August has more minutes. Those origins are in both the minute ranking and the late-arrival quartile. MCO → EWR and FLL → EWR are the high-rate routes with a real base.
 3. Sunday, and then Friday. Sunday combines the worst rate with the most minutes. Friday is the busiest day and is close behind on rate.
 4. Miami as a station reliability review: 34.3% late on 13,280 departures, without being a top-10 minute airport.
 5. LaGuardia’s cancellation rate (3.32%) beside its minute rank, separate from the late-arrival question.
