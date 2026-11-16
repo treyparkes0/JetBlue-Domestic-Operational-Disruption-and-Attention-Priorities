@@ -22,6 +22,9 @@ keep = [
     "CarrierDelay", "WeatherDelay", "NASDelay",
     "SecurityDelay", "LateAircraftDelay",
 ]
+missing_columns = [column for column in keep if column not in df.columns]
+if missing_columns:
+    raise SystemExit("Missing required columns: " + ", ".join(missing_columns))
 df = df[keep]
 print("After choosing columns:", df.shape)
 
@@ -118,6 +121,31 @@ if cancelled_count == 50674 and diverted_count == 7288:
     print("PASS cancelled and diverted counts match the audit")
 else:
     print("FAIL cancelled or diverted count")
+    checks_passed = False
+
+required_values = [
+    "FlightDate",
+    "Reporting_Airline",
+    "Origin",
+    "Dest",
+    "Cancelled",
+    "Diverted",
+    "Flights",
+]
+print("\nBlank required fields:")
+for column in required_values:
+    blank_count = df[column].isna().sum()
+    print(column + ":", blank_count)
+    if blank_count != 0:
+        print("FAIL", column, "has blank values")
+        checks_passed = False
+
+flights_not_one = (df["Flights"] != 1).sum()
+print("Rows where Flights is not 1:", flights_not_one)
+if flights_not_one == 0:
+    print("PASS every row has Flights = 1")
+else:
+    print("FAIL Flights is not 1 on every row")
     checks_passed = False
 
 if not checks_passed:

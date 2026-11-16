@@ -2,8 +2,9 @@
 .env
 .env.*
 
-# Local Word reports. Markdown in Documentation/ stays tracked.
-Reports/
+# Local Word reports. Dashboard screenshots in Reports/ stay tracked.
+Reports/*.docx
+Reports/*.md
 RESEARCH_PROPOSAL
 WEEKLY_REPORT
 

@@ -25,7 +25,8 @@ On flights that were already late, carrier delay plus late-aircraft delay is 76.
 - Top origins by arrival-delay minutes: JFK 6.52 million, Boston 6.31 million, Fort Lauderdale 3.78 million, Orlando 3.51 million, San Juan 1.93 million. Together they are 1,065,139 flights (50.5%) and 24,551 cancellations (48.4%).
 - Largest directed route by minutes: MCO → JFK, 612,862 minutes, 31.8% late. Boston–Washington carries a similar load at a rate in the low 20s.
 - High rate with a real route base: MCO → EWR 35.9% on 14,407 flights, FLL → EWR 35.8% on 10,993 flights.
-- Sunday: 29.5% late, 2.88% cancelled, 7.37 million minutes. Friday is the busiest day (314,540 flights, 28.6% late). Wednesday is the most reliable day (23.5% late). Both Sunday and July still lead with 2020 removed.
+- Sunday: 29.5% late, 2.88% cancelled, 7.37 million minutes. Friday is the busiest day (314,540 flights, 28.6% late). Wednesday is the most reliable day (23.5% late). Both Sunday and July still lead with 2020 removed. With 2020 removed, Sunday’s late-arrival gap is 7.8 points in January and 0.9 points in July. The gap is a winter gap. It does not explain July.
+- In 2022 through 2025 the top four origins by minutes stay JFK, Boston, Orlando, and Fort Lauderdale. Orlando moves ahead of Fort Lauderdale. LaGuardia replaces San Juan as fifth (1,050,166 minutes against 1,008,950). Over the full window San Juan is fifth. That window does not change the first review.
 - July is the heaviest month (33.6% late, 5,754,997 minutes). With 2020 removed, July is 34.9% late. August and December both round to 32.0% late, and August has more minutes (4,284,267 versus 3,942,031). October is the lightest late-arrival month (21.1%). For MCO → JFK, MCO → EWR, and FLL → EWR together, July is first and August is second. December is not the next month for those three routes.
 - Cancellation codes: weather 36.1%, carrier 28.6%, NAS 22.0%, security 13.3%. Of the 2020 security-coded cancellations, 6,749 are March and April, and six are in July. One security-coded cancellation is in May 2023.
 - Cause minutes on late arrivals: late aircraft 39.2%, carrier 37.2%, NAS 20.7%, weather 2.7%, security 0.2%. Weather here is the extreme-weather bucket, not every weather minute inside NAS.
@@ -37,7 +38,7 @@ These are places to investigate. They are not a claim that one change will cut d
 
 1. Review JFK and Boston first. Together they hold 12.8 million arrival-delay minutes, 29% of the network’s 44.2 million. JFK has 317,477 flights and a 27.8% late-arrival rate. Boston has 350,117 flights and a 25.4% late-arrival rate. Boston flies more and is late less often. JFK still has more minutes. Ask whether turns and late aircraft explain that gap. The file does not show that cause. On late flights, the recorded mix is 39.2% late aircraft and 37.2% carrier. That mix does not prove those minutes were avoidable.
 2. Review MCO → JFK, MCO → EWR, and FLL → EWR in July, then August. MCO → JFK is 22,110 flights, 31.8% late, and 612,862 minutes. MCO → EWR is 14,407 flights, 35.9% late, and 434,041 minutes. FLL → EWR is 10,993 flights, 35.8% late, and 299,164 minutes. July is first for the network and for these three routes together. August is second. Leave December off this list. June has more of these routes’ minutes than December does. For FLL → EWR, also look at April. April has more of that route’s minutes than July. July has the higher late-arrival rate.
-3. Review Sunday, then Friday. Sunday has 312,745 flights, a 29.5% late-arrival rate, and 7.37 million minutes. Friday is the busiest day, with 314,540 flights, a 28.6% late-arrival rate, and 6.95 million minutes.
+3. Review Sunday, then Friday. Sunday has 312,745 flights, a 29.5% late-arrival rate, and 7.37 million minutes. Friday is the busiest day, with 314,540 flights, a 28.6% late-arrival rate, and 6.95 million minutes. The Sunday gap is large in winter and almost gone in July and August, so this review does not explain July.
 4. Review Miami for late arrivals. 34.3% of Miami flights arrive late, on 13,280 flights. Miami is 22nd by total minutes, so this is a reliability review, not a minute review.
 5. Review LaGuardia for cancellations. 2,168 of 65,340 flights were cancelled, 3.32%. LaGuardia is 7th by total minutes and the only top-10 minute airport above the 3.06% cancellation line. That line is the top quarter of cancellation rates among origins with at least 1,000 flights. Fort Myers is the next large airport on that cancellation list.
 
@@ -47,7 +48,15 @@ Leave the 2020 security-coded cancellations, including the six in July, and airp
 
 `Jetblue_Final_analysis.pbix` reads `jetblue_capstone.powerbi_star` (`Fact_Flight`, `Dim_Month`, `Dim_Weekday`, `Dim_Origin`, `Dim_Route`). Rates are measures on the flight fact: summed late arrivals divided by summed operated flights, and summed cancellations divided by summed flights. The attention-list comparison stays in the workbook.
 
-Screenshot files are not in this repository. Open the report in Power BI Desktop and export the six pages if you want images in the portfolio. Edit titles in Desktop. The `.pbix` is a signed package, so unzipping it and rewriting the report files makes Desktop reject the file.
+Page images are in `Reports/`. Overview, Three Events, and Patterns show the full window. The Minutes and Rate and Size images were saved with 2026 selected, so those two charts are January–July 2026. There is no Attention screenshot in this set. Edit titles in Desktop. The `.pbix` is a signed package, so unzipping it and rewriting the report files makes Desktop reject the file.
+
+| Page | Image |
+| --- | --- |
+| Overview | `Reports/Screenshot 2026-11-16 174933.png` |
+| Three Events | `Reports/Screenshot 2026-11-16 175008.png` |
+| Minutes | `Reports/Screenshot 2026-11-16 175027.png` |
+| Rate and Size | `Reports/Screenshot 2026-11-16 175114.png` |
+| Patterns | `Reports/Screenshot 2026-11-16 175046.png` |
 
 The page list below is the report that opens. Patterns shows carrier, late-aircraft, security, weather, and NAS cause minutes. Late aircraft is 39.2% of cause minutes.
 
