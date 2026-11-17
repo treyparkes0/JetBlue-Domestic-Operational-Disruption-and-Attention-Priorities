@@ -4,7 +4,7 @@ Draft paragraphs for the paper. These are not part of the paper. Checked 16 Nove
 
 ## Sunday is a winter gap, not a July gap
 
-Sunday’s late-arrival gap is large in winter and almost gone in July and August. With 2020 removed, Sunday’s late-arrival rate sits above the other days by 7.8 points in January, 5.9 in February, 6.7 in March, 5.6 in November, and 4.5 in December. In July the gap is 0.9 points, 35.7% against 34.7% on the other days. In August it is 0.1 point. In September Sunday is 1.0 point lower than the other days. July is a high late-arrival month on every day of the week. A Sunday review belongs with the winter operation. It is not a way to explain July.
+Sunday’s late-arrival gap is large in winter and almost gone in July. With every year included, Sunday’s late-arrival rate sits above the other days by 7.4 points in January (32.7% against 25.3%), 4.6 in February, 5.9 in March, 5.0 in November, and 4.4 in December. In July the gap is 0.9 points, 34.4% against 33.5% on the other days. In August Sunday is 0.6 points lower than the other days. In September it is 1.0 point lower. July is a high late-arrival month on every day of the week. A Sunday review belongs with the winter operation. It is not a way to explain July.
 
 ## 2022–2025 fifth place
 
