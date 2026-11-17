@@ -1,6 +1,6 @@
 # Methodology
 
-Rules for how the project measures JetBlue domestic disruption. Facts about the file come from `DATA_AUDIT.md` (reviewed 8 October 2026). The exploratory rankings are in `FINDINGS.md` (reconciled 2 November 2026; workbook and dashboard checked 8 November 2026). Scope decisions are marked as decisions. This file does not choose risk-score weights.
+Rules for how the project measures JetBlue domestic disruption. Facts about the file come from `DATA_AUDIT.md` (reviewed 8 October 2026). The exploratory rankings are in `FINDINGS.md` (reconciled 2 November 2026; workbook and dashboard checked 8 November 2026). Technical validation of the dbt project is recorded below as a 16 November 2026 `dbt build`. Those dates mark different milestones: file audit, findings reconciliation, memo/workbook/dashboard reporting, and later technical validation. Scope decisions are marked as decisions. This file does not choose risk-score weights.
 
 Nothing here is a causal estimate. An association between a schedule attribute and an outcome is not a claim that changing the attribute will change the outcome.
 

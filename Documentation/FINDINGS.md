@@ -1,10 +1,13 @@
 # Findings: JetBlue domestic operational risk
 
-**Reconciled:** 2 November 2026  
-**Workbook and dashboard:** 8 November 2026  
+**Findings reconciled:** 2 November 2026  
+**Workbook and dashboard documentation:** 8 November 2026  
+**Latest documented dbt validation:** 16 November 2026 (`dbt build`, 13 views and 40 tests; see `METHODOLOGY.md`)  
 **Warehouse:** `jetblue_capstone.dbt_dev`  
-**Python check:** `src/jetblue_eda.py`, same date, against `data/raw/jetblue_b6.csv`  
+**Python check:** `src/jetblue_eda.py`, against `data/raw/jetblue_b6.csv` (aligned to the 2 November 2026 reconciliation)  
 **Question:** where JetBlue’s domestic operational risk is concentrated, what is associated with it, and where limited attention should go first.
+
+Central message: domestic operational disruption is concentrated across specific airports, routes, and time periods. Management should distinguish accumulated operational impact (arrival-delay minutes) from elevated reliability rates (late-arrival or cancellation rates) when prioritizing attention. Diversions and reported delay causes stay separate measures.
 
 These figures are descriptive. An association is not a cause. None of them is a dollar saving. Definitions are in `METHODOLOGY.md`.
 
@@ -183,7 +186,7 @@ JFK, Boston, San Juan, DCA, West Palm Beach, and LAX are in the minute top 10 an
 These are places to look. They are not a claim that a particular change will cut delay.
 
 1. Review JFK and Boston first. Together they hold 12.8 million arrival-delay minutes, 29% of the 44.2 million. JFK has 317,477 flights and a 27.8% late-arrival rate. Boston has 350,117 flights and a 25.4% late-arrival rate. Boston flies more and is late less often. JFK still has more minutes. These are arrival-delay minutes on flights that departed the origin. Ask whether turns and late aircraft explain the gap. The file does not show that cause. On late flights, the recorded mix is 39.2% late aircraft and 37.2% carrier. That mix does not prove those minutes were avoidable.
-2. Review MCO → JFK, MCO → EWR, and FLL → EWR in July, then August. MCO → JFK is 22,110 flights, 31.8% late, and 612,862 minutes. MCO → EWR is 14,407 flights, 35.9% late, and 434,041 minutes. FLL → EWR is 10,993 flights, 35.8% late, and 299,164 minutes. July is first for the network and for these three routes together. August is second. Leave December off this list. June has more of these routes’ minutes than December does. For FLL → EWR, also look at April. April has more of that route’s minutes than July. July has the higher late-arrival rate. Fort Lauderdale and Orlando are in both the minute ranking and the late-arrival quartile.
+2. Review MCO → JFK, MCO → EWR, and FLL → EWR, with the review month guided by each route’s pattern. MCO → JFK is 22,110 flights, 31.8% late, and 612,862 minutes. MCO → EWR is 14,407 flights, 35.9% late, and 434,041 minutes. FLL → EWR is 10,993 flights, 35.8% late, and 299,164 minutes. July is the strongest disruption month network-wide, and July is also first when these three routes are taken together; August is second for that combined view. That does not mean July is the best review month for every individual route. For FLL → EWR, April has more arrival-delay minutes than July, while July has the higher late-arrival rate. Leave December off the first list: June has more of these routes’ combined minutes than December does. Use each route’s monthly minute and rate pattern to set the review window. Fort Lauderdale and Orlando are in both the minute ranking and the late-arrival quartile.
 3. Review Sunday, then Friday. Sunday has 312,745 flights, a 29.5% late-arrival rate, and 7.37 million minutes. Friday is the busiest day, with 314,540 flights, a 28.6% late-arrival rate, and 6.95 million minutes. With every year included, the Sunday gap is 7.4 points in January and 0.9 points in July. This review does not explain July.
 4. Review Miami for late arrivals. 34.3% of Miami flights arrive late, on 13,280 flights. Miami is 22nd by total minutes, so this is a reliability review, not a minute review.
 5. Review LaGuardia for cancellations. 2,168 of 65,340 flights were cancelled, 3.32%. LaGuardia is 7th by total minutes and the only top-10 minute airport above the 3.06% cancellation line. That line is the 75th percentile of cancellation rates among origins with at least 1,000 flights. Fort Myers is the next large airport on that cancellation list.

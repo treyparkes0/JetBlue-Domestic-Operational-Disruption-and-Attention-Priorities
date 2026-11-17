@@ -2,13 +2,15 @@
 
 **To:** Director, airline operations  
 **From:** Trey Parkes  
-**Date:** 8 November 2026  
+**Date:** 8 November 2026 (memo, workbook, and dashboard documentation)  
+**Findings reconciled:** 2 November 2026  
+**Latest documented dbt validation:** 16 November 2026  
 **Source:** U.S. Bureau of Transportation Statistics, Reporting Carrier On-Time Performance, JetBlue (`B6`) only. Public data. Not an internal JetBlue extract.  
 **Window:** 1 January 2018–31 July 2026. 2,110,783 domestic flights.
 
 ## The problem
 
-JetBlue’s domestic disruption is not spread evenly. A late arrival, a cancellation, and a diversion are different events, and the file is large enough to show where each one concentrates. Limited attention should follow the minutes on busy places, with the rate read beside the minutes. A high rate on a thin place is a watch item.
+JetBlue’s domestic operational disruption is concentrated across specific airports, routes, and time periods. A late arrival, a cancellation, and a diversion are different events, and the file is large enough to show where each one concentrates. Limited attention should follow accumulated operational impact—arrival-delay minutes on busy places—with the late-arrival or cancellation rate read beside those minutes. Do not collapse these into one disruption score. A high rate on a thin place is a watch item.
 
 In this window, 26.9% of operated flights arrived 15 minutes or more late, 2.40% of scheduled flights were cancelled, and 0.345% were diverted and not cancelled. Operated flights accumulated 44.2 million arrival-delay minutes. On the flights that were already late, 76.4% of the recorded cause minutes sit in the carrier and late-aircraft buckets. That is an association in the reporting categories. It is not proof that those minutes were avoidable, and it is not a cost.
 
@@ -55,7 +57,7 @@ Six origins between 250 and 999 flights have late-arrival rates in the same rang
 ## What to investigate first
 
 1. **Review JFK and Boston first.** Together they hold 12.8 million arrival-delay minutes, 29% of the network’s 44.2 million. JFK has 317,477 flights and a 27.8% late-arrival rate. Boston has 350,117 flights and a 25.4% late-arrival rate. Boston flies more and is late less often. JFK still has more minutes. Ask whether turns and late aircraft explain that gap. The file does not show that cause. On late flights, the recorded mix is 39.2% late aircraft and 37.2% carrier. That mix does not prove those minutes were avoidable.
-2. **Review MCO → JFK, MCO → EWR, and FLL → EWR in July, then August.** MCO → JFK is 22,110 flights, 31.8% late, and 612,862 minutes. MCO → EWR is 14,407 flights, 35.9% late, and 434,041 minutes. FLL → EWR is 10,993 flights, 35.8% late, and 299,164 minutes. July is first for the network and for these three routes together. August is second. Leave December off this list. June has more of these routes’ minutes than December does. For FLL → EWR, also look at April. April has more of that route’s minutes than July. July has the higher late-arrival rate.
+2. **Review MCO → JFK, MCO → EWR, and FLL → EWR, with the review month guided by each route’s pattern.** MCO → JFK is 22,110 flights, 31.8% late, and 612,862 minutes. MCO → EWR is 14,407 flights, 35.9% late, and 434,041 minutes. FLL → EWR is 10,993 flights, 35.8% late, and 299,164 minutes. July is the strongest disruption month network-wide, and July is also first when these three routes are taken together; August is second for that combined view. That does **not** mean July is the best review month for every individual route. For FLL → EWR, April has more arrival-delay minutes than July, while July has the higher late-arrival rate. Leave December off the first list: June has more of these routes’ combined minutes than December does. Use each route’s monthly minute and rate pattern to set the review window; do not assume a single summer month fits all three.
 3. **Review Sunday, then Friday.** Sunday has 312,745 flights, a 29.5% late-arrival rate, and 7.37 million minutes. Friday is the busiest day, with 314,540 flights, a 28.6% late-arrival rate, and 6.95 million minutes. With every year included, the Sunday gap is 7.4 points in January and 0.9 points in July. This review does not explain July.
 4. **Review Miami for late arrivals.** 34.3% of Miami flights arrive late, on 13,280 flights. Miami is 22nd by total minutes, so this is a reliability review, not a minute review.
 5. **Review LaGuardia for cancellations.** 2,168 of 65,340 flights were cancelled, 3.32%. LaGuardia is 7th by total minutes and the only top-10 minute airport above the 3.06% cancellation line. That line is the top quarter of cancellation rates among origins with at least 1,000 flights. Fort Myers is the next large airport on that cancellation list.
