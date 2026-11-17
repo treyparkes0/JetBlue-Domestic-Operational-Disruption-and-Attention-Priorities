@@ -126,15 +126,6 @@ Bureau of Transportation Statistics Reporting Carrier On-Time Performance (1987â
 
 The file has no passengers, fares, crew, maintenance, or independent weather. There is no causal claim and no dollar saving. 2020 is not a normal year. 2026 cannot be split into operated and marketed codeshare flights and cannot be annualized. Blank cause minutes are not zeros. Arrival-delay minutes use the floored field, so early arrivals contribute 0. The workbook compares lists. It does not estimate the effect of a program.
 
-## Reproduction instructions
-
-1. Put the official monthly zips in `data/raw/`.
-2. From this folder, run `python src/filter_jetblue.py`, then `python src/jetblue_eda.py`. Both scripts resolve `data/raw` from the repository folder. `jetblue_eda.py` writes `data/raw/jetblue_b6_clean.csv` only after the row, carrier, date, duplicate, clock, cancellation, and diversion checks pass.
-3. Load `data/raw/jetblue_b6_clean.csv` into Databricks, then create `jetblue_capstone.views.flight_performance` from `sql/flight_performance.sql`. That load is already done in this workspace and is not built by dbt. The SQL file is the column mapping. Do not run it until its source table name matches the table you loaded. The models read these columns: `Flight_Year`, `Flight_Month`, `Flight_Date`, `Day_of_Week`, `Origin_Airport_ID`, `Origin_Airport`, `Origin_City`, `Origin_State`, `Destination_Airport_ID`, `Destination_Airport`, `Destination_City`, `Destination_State`, `Cancelled`, `Diverted`, `Arrival_Delay_15_or_More`, `Arrival_Delay_Minutes`, `Carrier_Delay`, `Late_Aircraft_Delay`, `Weather_Delay`, `National_Air_System_Delay`, `Security_Delay`, and `CancellationCode`.
-4. Use a dbt profile named `jetblue` whose target schema is `dbt_dev`. `dbt_project.yml` sends the dashboard models to the `powerbi_star` schema. From this folder, run `dbt build`.
-5. `Raw Data` in the workbook is the origin extract. `Airports`, `Scenario`, and `Scorecard` read that sheet. The `Airports` and `Scenario` tabs have a trailing space in the sheet name. The formulas use that name. `Scorecard` compares the minutes list with the highest late-arrival rates and states the volume floors.
-
-`dbt build` on 16 November 2026 passed 13 views and 40 tests: the 8 analytical views in `dbt_dev` and the 5 dashboard views in `powerbi_star`. July 2023, the origin ranking, and MCO â†’ JFK still match `FINDINGS.md`. The 40 tests include the network totals, the five cause-minute totals, and the percentile cutoffs.
 
 ## Repository structure
 
